@@ -1,6 +1,6 @@
-package Database;
+package DAL;
 
-import ThongTin.ThongTinSuDung;
+import BLL.ThongTinSuDung;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -9,7 +9,7 @@ public class ThongTinSuDungDAO {
         String sql = "INSERT INTO THONGTINSUDUNG (TAIKHOAN, SDT, MAY) VALUES (?, ?, ?)";
 
         try (
-                Connection con = new QuanLyTiemNetDBS().getConnection();
+                Connection con = new QLTiemNetConnectionDBS().getConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);
         ) {
             pstm.setString(2, thongTinSuDung.getUsername());

@@ -1,12 +1,11 @@
-package Database;
+package DAL;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 
-public class QuanLyTiemNetDBS {
+public class QLTiemNetConnectionDBS {
     private static final SQLServerDataSource ds = new SQLServerDataSource();
     static {
         ds.setUser("sa");

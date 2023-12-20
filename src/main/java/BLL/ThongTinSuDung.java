@@ -1,4 +1,4 @@
-package ThongTin;
+package BLL;
 
 public class ThongTinSuDung {
     private String maMay, username, sdt;

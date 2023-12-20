@@ -1,7 +1,8 @@
-package Controller;
+package GUI;
 
-import Database.DanhSachTKDAO;
-import ThongTin.TaiKhoan;
+import BLL.InFoTaiKhoan.DanhSachTK;
+import BLL.InFoTaiKhoan.TaiKhoan;
+import DAL.TaiKhoanDAO;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -149,11 +150,10 @@ public class LoginController implements Initializable {
     public void handleLoginButtonAction(ActionEvent event) {
         String username = si_username.getText();
         String password = si_password.getText();
-
-        DanhSachTKDAO dao = new DanhSachTKDAO();
-        System.out.println("Hello");
+        TaiKhoanDAO dao = new TaiKhoanDAO();
         try {
-            TaiKhoan tk = dao.findByUsernameAndPassword(username, password);
+            TaiKhoan tk = dao.findByUsernameAndSdt(username, password);
+            new DanhSachTK().setTaiKhoanDangNhap(tk);
             if (tk != null) {
                 // Nếu có kết quả từ cơ sở dữ liệu, thông báo đăng nhập thành công
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -201,7 +201,7 @@ public class LoginController implements Initializable {
             tk.setPassword(su_password.getText());
 
             // Thực hiện việc chèn dữ liệu vào cơ sở dữ liệu
-            DanhSachTKDAO dao = new DanhSachTKDAO();
+            TaiKhoanDAO dao = new TaiKhoanDAO();
             boolean isSuccess = dao.insert(tk);
 
             if (isSuccess) {
@@ -221,9 +221,9 @@ public class LoginController implements Initializable {
         try {
             String username = fp_username.getText();
             String sdt = fp_sdt.getText();
-            DanhSachTKDAO dao = new DanhSachTKDAO();
+            TaiKhoanDAO dao = new TaiKhoanDAO();
             // Thực hiện truy vấn để kiểm tra thông tin đăng nhập
-            if (dao.findByUsernameAndPassword(username, sdt) != null) {
+            if (dao.findByUsernameAndSdt(username, sdt) != null) {
                 // Nếu thông tin đăng nhập đúng, chuyển sang AnchorPane np_newPassForm
                 fp_questionForm.setVisible(false);
                 np_newPassForm.setVisible(true);
@@ -242,8 +242,8 @@ public class LoginController implements Initializable {
 
     private Pair<String, String> getUsernameAndSdt(String username, String sdt) {
         try {
-            DanhSachTKDAO dao = new DanhSachTKDAO();
-            TaiKhoan res = dao.findByUsernameAndPassword(username, sdt);
+            TaiKhoanDAO dao = new TaiKhoanDAO();
+            TaiKhoan res = dao.findByUsernameAndSdt(username, sdt);
             if (res != null) {
                 return new Pair<>(res.getUsername(), res.getSdt());
             } else {
@@ -291,7 +291,7 @@ public class LoginController implements Initializable {
                     String retrievedUsername = usernameAndSdt.getKey();
                     String retrievedSdt = usernameAndSdt.getValue();
 
-                    DanhSachTKDAO dao = new DanhSachTKDAO();
+                    TaiKhoanDAO dao = new TaiKhoanDAO();
                     TaiKhoan tk = new TaiKhoan();
                     tk.setUsername(retrievedUsername);
                     tk.setSdt(retrievedSdt);

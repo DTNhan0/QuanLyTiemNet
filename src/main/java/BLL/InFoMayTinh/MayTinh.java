@@ -1,6 +1,8 @@
-package ThongTin;
+package BLL.InFoMayTinh;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MayTinh {
     private String maMay, phong;

@@ -6,10 +6,17 @@ module mainscript.quanlytiemnet {
     requires java.sql;
     requires java.naming;
     requires javafx.base;
+    requires jdk.internal.le;
 
 
     opens mainscript.quanlytiemnet to javafx.fxml;
-    opens Controller to javafx.fxml;
-    exports Controller;
+    opens GUI to javafx.fxml;
+    exports GUI;
     exports mainscript.quanlytiemnet;
+    exports GUI.TrangThaiMT;
+    opens GUI.TrangThaiMT to javafx.fxml;
+    exports GUI.DSTaiKhoan;
+    opens GUI.DSTaiKhoan to javafx.fxml;
+    exports GUI.DanhSachMT;
+    opens GUI.DanhSachMT to javafx.fxml;
 }
