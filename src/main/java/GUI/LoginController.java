@@ -92,20 +92,20 @@ public class LoginController implements Initializable {
     private TextField su_username;
 
 
-    public void backToLoginForm(){
+    public void backToLoginForm() {
         si_loginForm.setVisible(true);
         fp_questionForm.setVisible(false);
 
     }
 
-    public void backToQuestionForm(){
+    public void backToQuestionForm() {
         fp_questionForm.setVisible(true);
         np_newPassForm.setVisible(false);
 
 
     }
 
-    public void switchForgotPass(){
+    public void switchForgotPass() {
         fp_questionForm.setVisible(true);
         si_loginForm.setVisible(false);
 
@@ -114,8 +114,7 @@ public class LoginController implements Initializable {
     public void switchForm(ActionEvent event) {
         TranslateTransition slider = new TranslateTransition();
 
-        if(event.getSource() == side_CreateBtn)
-        {
+        if (event.getSource() == side_CreateBtn) {
             slider.setNode(side_form);
             slider.setToX(400);
             slider.setDuration(Duration.seconds(.5));
@@ -129,12 +128,12 @@ public class LoginController implements Initializable {
                 np_newPassForm.setVisible(false);
             });
             slider.play();
-        } else if (event.getSource() == side_AlreadyHave){
+        } else if (event.getSource() == side_AlreadyHave) {
             slider.setNode(side_form);
             slider.setToX(0);
             slider.setDuration(Duration.seconds(.5));
 
-            slider.setOnFinished( (ActionEvent e) ->{
+            slider.setOnFinished((ActionEvent e) -> {
                 side_AlreadyHave.setVisible(false);
                 side_CreateBtn.setVisible(true);
 
@@ -322,7 +321,7 @@ public class LoginController implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL url, ResourceBundle rb) {
 
     }
 

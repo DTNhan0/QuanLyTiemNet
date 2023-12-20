@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DanhSachMT {
-    static List <MayTinh> DanhSachMay;
+    static List<MayTinh> DanhSachMay;
+
     static {
         try {
             DanhSachMay = new MayTinhDAO().getAll();
@@ -18,22 +19,25 @@ public class DanhSachMT {
     public List<MayTinh> getDanhSachMay() {
         return DanhSachMay;
     }
+
     public void setDanhSachMay(List<MayTinh> danhSachMay) {
         DanhSachMay = danhSachMay;
     }
 
-    public List <MayTinh> LayDSMayTheoPhong(String phong) throws Exception {
-        List <MayTinh> ds = new DanhSachMT().getDanhSachMay();
-        List <MayTinh> DSMayTheoPhong = new ArrayList<>();
-        for(MayTinh mt : ds){
-            if(mt.getPhong().equals(phong)){
+    public List<MayTinh> LayDSMayTheoPhong(String phong) throws Exception {
+        List<MayTinh> ds = new DanhSachMT().getDanhSachMay();
+        List<MayTinh> DSMayTheoPhong = new ArrayList<>();
+        for (MayTinh mt : ds) {
+            if (mt.getPhong().equals(phong)) {
                 DSMayTheoPhong.add(mt);
             }
         }
         return DSMayTheoPhong;
     }
+
     public DanhSachMT() throws Exception {
     }
+
     public static int TimMay(String maMay, String phong) {
         for (int i = 0; i < DanhSachMay.size(); i++) {
             MayTinh may = DanhSachMay.get(i);
@@ -48,6 +52,7 @@ public class DanhSachMT {
         DanhSachMay.add(may);
         MayTinhDAO.insertMayTinh(may);
     }
+
     public static void XoaMay(MayTinh mayTinh) throws Exception {
         int index_MayXoa = TimMay(mayTinh.getMaMay(), mayTinh.getPhong());
         if (index_MayXoa != -1 && DanhSachMay.get(index_MayXoa).getPhong().equals(mayTinh.getPhong())) {

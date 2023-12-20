@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 
 public class Phong_VIP_Controller implements Initializable {
     List<MayTinh> DSMay;
+
     {
         try {
             DSMay = new DSMayPhongThuongVIP().getDSMayPhongVIP();
@@ -117,11 +118,12 @@ public class Phong_VIP_Controller implements Initializable {
     @FXML
     private TextField UserTF;
     private String selectedIDMayFormat;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        for(MayTinh mt : DSMay){
+        for (MayTinh mt : DSMay) {
             //Hỏng
-            if(mt.isCoSan() == false && mt.isTrangThai() == false){
+            if (mt.isCoSan() == false && mt.isTrangThai() == false) {
                 String IDMay = mt.getMaMay().substring(0, 1) + mt.getMaMay().substring(1).toLowerCase();
                 try {
                     setCircleColor(IDMay, Color.RED);
@@ -132,7 +134,7 @@ public class Phong_VIP_Controller implements Initializable {
                 }
             }
             //Bảo trì
-            if(mt.isCoSan() == true && mt.isTrangThai() == false){
+            if (mt.isCoSan() == true && mt.isTrangThai() == false) {
                 String IDMay = mt.getMaMay().substring(0, 1) + mt.getMaMay().substring(1).toLowerCase();
                 try {
                     setCircleColor(IDMay, Color.YELLOW);
@@ -143,7 +145,7 @@ public class Phong_VIP_Controller implements Initializable {
                 }
             }
             //Có người sử dụng
-            if(mt.isCoSan() == false && mt.isTrangThai() == true){
+            if (mt.isCoSan() == false && mt.isTrangThai() == true) {
                 String IDMay = mt.getMaMay().substring(0, 1) + mt.getMaMay().substring(1).toLowerCase();
                 try {
                     setCircleColor(IDMay, Color.web("#00ff48"));
@@ -154,7 +156,7 @@ public class Phong_VIP_Controller implements Initializable {
                 }
             }
             //Có sẵn
-            if(mt.isCoSan() == true && mt.isTrangThai() == true){
+            if (mt.isCoSan() == true && mt.isTrangThai() == true) {
                 String IDMay = mt.getMaMay().substring(0, 1) + mt.getMaMay().substring(1).toLowerCase();
                 try {
                     setCircleColor(IDMay, (Color) Paint.valueOf("#969696"));
@@ -166,7 +168,8 @@ public class Phong_VIP_Controller implements Initializable {
             }
         }
     }
-    public void HienThiThongTinNhap(ActionEvent event){
+
+    public void HienThiThongTinNhap(ActionEvent event) {
         // Lấy thông tin về nút được nhấn
         JFXButton clickedButton = (JFXButton) event.getSource();
         // Lấy text của nút và hiển thị nó trong Label
@@ -179,6 +182,7 @@ public class Phong_VIP_Controller implements Initializable {
         DangBaoTriBT.setDisable(false);
         CoSanBT.setDisable(false);
     }
+
     private Circle getCircleById(String id) throws NoSuchFieldException, IllegalAccessException {
         // Lấy trường (field) Circle dựa trên tên
         Field field = getClass().getDeclaredField(id);
@@ -187,12 +191,14 @@ public class Phong_VIP_Controller implements Initializable {
         // Trả về giá trị của trường, tức là Circle
         return (Circle) field.get(this);
     }
+
     private void setCircleColor(String id, Color color) throws NoSuchFieldException, IllegalAccessException {
         Circle selectedCircle = getCircleById(id);
         if (selectedCircle != null) {
             selectedCircle.setFill(color);
         }
     }
+
     //Lấy ID máy được chọn
     @FXML
     public void chonButton(ActionEvent e) throws NoSuchFieldException, IllegalAccessException {
@@ -225,7 +231,8 @@ public class Phong_VIP_Controller implements Initializable {
         NhapNDHong.setVisible(false);
         NDhong.setText(null);
     }
-    public void LamMoi(){
+
+    public void LamMoi() {
         HienIDMay.setText("NULL");
         UserTF.setDisable(true);
         SdtTF.setDisable(true);

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class DSMayPhongThuong2 {
     static List<MayTinh> DSMayPhong2;
+
     static {
         try {
             DSMayPhong2 = new DanhSachMT().LayDSMayTheoPhong("T02");
@@ -30,8 +31,8 @@ public class DSMayPhongThuong2 {
 
     public List<MayTinh> HienCacMayDangOnl() {
         List<MayTinh> CacMayONL = new ArrayList<>();
-        for(MayTinh mt : DSMayPhong2){
-            if(mt.isTrangThai() == true && mt.isCoSan() == false){
+        for (MayTinh mt : DSMayPhong2) {
+            if (mt.isTrangThai() == true && mt.isCoSan() == false) {
                 CacMayONL.add(mt);
             }
         }

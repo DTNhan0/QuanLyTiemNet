@@ -14,8 +14,7 @@ public class TaiKhoanDAO {
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
-        )
-        {
+        ) {
             while (rs.next()) {
                 TaiKhoan tk = new TaiKhoan();
                 tk.setUsername(rs.getString("USERNAME"));
@@ -33,13 +32,12 @@ public class TaiKhoanDAO {
         }
     }
 
-    public void ThemTaiKhoanDBS(TaiKhoan tk){
+    public void ThemTaiKhoanDBS(TaiKhoan tk) {
         String sql = "INSERT INTO TAIKHOAN (USERNAME, SDT, PASSWORD, ROLE, HANGTHANHVIEN, SOPHUTDADUNG, SOTIENTICHLUY, SOTIENCONLAI, DANGSUDUNG) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);
-        )
-        {
+        ) {
             pstm.setString(1, tk.getUsername());
             pstm.setString(2, tk.getSdt());
             pstm.setString(3, tk.getPassword());
@@ -57,6 +55,8 @@ public class TaiKhoanDAO {
                 System.out.println("Không thể thêm tài khoản vào DBS!!!");
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -77,6 +77,8 @@ public class TaiKhoanDAO {
                 System.out.println("Không thể xóa tài khoản khỏi DBS. Kiểm tra lại thông tin đầu vào!!!");
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -101,6 +103,8 @@ public class TaiKhoanDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -109,8 +113,7 @@ public class TaiKhoanDAO {
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);
-        )
-        {
+        ) {
             pstm.setString(1, username);
             pstm.setString(2, password);
             ResultSet rs = pstm.executeQuery();
@@ -130,8 +133,7 @@ public class TaiKhoanDAO {
                 System.out.println("Không có tài khoản nào được tìm thấy với username và password cung cấp.");
                 return null;
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
@@ -141,8 +143,7 @@ public class TaiKhoanDAO {
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);
-        )
-        {
+        ) {
             pstm.setString(1, tk.getUsername());
             pstm.setString(2, tk.getSdt());
             pstm.setString(3, tk.getPassword());
@@ -156,8 +157,7 @@ public class TaiKhoanDAO {
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);
-        )
-        {
+        ) {
             pstm.setString(2, tk.getUsername());
             pstm.setString(3, tk.getSdt());
             pstm.setString(1, tk.getPassword());
@@ -166,7 +166,7 @@ public class TaiKhoanDAO {
         }
     }
 
-    public void NaptienTK(TaiKhoan tk, Double tienMoi){
+    public void NaptienTK(TaiKhoan tk, Double tienMoi) {
         String sql = "UPDATE TAIKHOAN SET SOTIENTICHLUY = ?, SOTIENCONLAI = ? WHERE USERNAME = ? AND SDT = ?";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
@@ -184,6 +184,8 @@ public class TaiKhoanDAO {
                 System.out.println("Không thể cập nhật tài khoản trong DBS. Kiểm tra lại thông tin đầu vào!!!");
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

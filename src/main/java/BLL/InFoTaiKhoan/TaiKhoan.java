@@ -5,6 +5,7 @@ public class TaiKhoan {
     private boolean Role, DangSD;
     private int Sophutdadung;
     private double SotienTichLuy, SoTienConLai;
+
     public String getUsername() {
         return Username;
     }
@@ -77,7 +78,10 @@ public class TaiKhoan {
         SoTienConLai = soTienConLai;
     }
 
-    public TaiKhoan() {super();}
+    public TaiKhoan() {
+        super();
+    }
+
     public TaiKhoan(String username, String password, String sdt, String hangthanhvien, boolean role) {
         Username = username;
         Password = password;

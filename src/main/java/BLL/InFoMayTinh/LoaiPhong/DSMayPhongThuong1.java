@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DSMayPhongThuong1 extends DanhSachMT {
-    static List <MayTinh> DSMayPhong1;
+    static List<MayTinh> DSMayPhong1;
+
     static {
         try {
             DSMayPhong1 = new DanhSachMT().LayDSMayTheoPhong("T01");
@@ -30,8 +31,8 @@ public class DSMayPhongThuong1 extends DanhSachMT {
 
     public List<MayTinh> HienCacMayDangOnl() {
         List<MayTinh> CacMayONL = new ArrayList<>();
-        for(MayTinh mt : DSMayPhong1){
-            if(mt.isTrangThai() == true && mt.isCoSan() == false){
+        for (MayTinh mt : DSMayPhong1) {
+            if (mt.isTrangThai() == true && mt.isCoSan() == false) {
                 CacMayONL.add(mt);
             }
         }

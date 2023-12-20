@@ -16,61 +16,64 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class DSMayTinhController implements Initializable {
-        DanhSachMT DBSMayTinh;
-        {
-            try {
-                DBSMayTinh = new DanhSachMT();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+    DanhSachMT DBSMayTinh;
+
+    {
+        try {
+            DBSMayTinh = new DanhSachMT();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        @FXML
-        private TableView<MayTinh> BangDSMT;
+    }
 
-        @FXML
-        private TableColumn<MayTinh, Integer> BaoHanhCol;
+    @FXML
+    private TableView<MayTinh> BangDSMT;
 
-        @FXML
-        private TextField BaoHanhTF;
+    @FXML
+    private TableColumn<MayTinh, Integer> BaoHanhCol;
 
-        @FXML
-        private TableColumn<MayTinh, Boolean> CoSanCol;
+    @FXML
+    private TextField BaoHanhTF;
 
-        @FXML
-        private JFXButton LamMoiBT;
+    @FXML
+    private TableColumn<MayTinh, Boolean> CoSanCol;
 
-        @FXML
-        private TableColumn<MayTinh, String> MMayCol;
+    @FXML
+    private JFXButton LamMoiBT;
 
-        @FXML
-        private TextField MMayTF;
+    @FXML
+    private TableColumn<MayTinh, String> MMayCol;
 
-        @FXML
-        private TableColumn<MayTinh, Date> NgayMuaCol;
+    @FXML
+    private TextField MMayTF;
 
-        @FXML
-        private DatePicker NgayMuaTF;
+    @FXML
+    private TableColumn<MayTinh, Date> NgayMuaCol;
 
-        @FXML
-        private JFXComboBox<String> PhongCB;
+    @FXML
+    private DatePicker NgayMuaTF;
 
-        @FXML
-        private TableColumn<MayTinh, String> PhongCol;
+    @FXML
+    private JFXComboBox<String> PhongCB;
 
-        @FXML
-        private JFXButton SuaBT;
+    @FXML
+    private TableColumn<MayTinh, String> PhongCol;
 
-        @FXML
-        private TableColumn<MayTinh, Integer> TGDungCol;
+    @FXML
+    private JFXButton SuaBT;
 
-        @FXML
-        private JFXButton ThemBT;
+    @FXML
+    private TableColumn<MayTinh, Integer> TGDungCol;
 
-        @FXML
-        private TableColumn<MayTinh, Boolean> TrangThaiCol;
+    @FXML
+    private JFXButton ThemBT;
 
-        @FXML
-        private JFXButton XoaBT;
+    @FXML
+    private TableColumn<MayTinh, Boolean> TrangThaiCol;
+
+    @FXML
+    private JFXButton XoaBT;
+
     private DatePicker convertToDatePicker(Date date) {
         if (date != null) {
             LocalDate localDate = date.toLocalDate();
@@ -79,23 +82,25 @@ public class DSMayTinhController implements Initializable {
             return new DatePicker();
         }
     }
+
     private void hienThiThongTinTaiKhoan(MayTinh mt) {
         MMayTF.setText(mt.getMaMay());
         BaoHanhTF.setText(String.valueOf(mt.getBaoHanh()));
         NgayMuaTF.setValue(convertToDatePicker(mt.getNgayMua()).getValue());
         MMayTF.setText(mt.getMaMay());
 
-        if(mt.getPhong().equals("T01")){
+        if (mt.getPhong().equals("T01")) {
             PhongCB.setValue("T01");
-        }else if(mt.getPhong().equals("T02")){
+        } else if (mt.getPhong().equals("T02")) {
             PhongCB.setValue("T02");
-        }else if (mt.getPhong().equals("VIP01")){
+        } else if (mt.getPhong().equals("VIP01")) {
             PhongCB.setValue("VIP01");
         }
         ThemBT.setDisable(true);
         MMayTF.setDisable(true);
         PhongCB.setDisable(true);
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String[] cacPhong = {"T01", "T02", "VIP01"};
@@ -123,6 +128,7 @@ public class DSMayTinhController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
     public void ThemMay() {
         String Mamay = MMayTF.getText();
         String BaoHanhText = BaoHanhTF.getText();
@@ -211,7 +217,7 @@ public class DSMayTinhController implements Initializable {
         }
     }
 
-    public void CapNhatMay(){
+    public void CapNhatMay() {
         if (BangDSMT.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Lỗi");
@@ -250,7 +256,7 @@ public class DSMayTinhController implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("Bạn có chắc muốn cập nhật lại máy không?");
 
-                    // Sử dụng Optional để xác nhận người dùng chọn OK hoặc Cancel
+                // Sử dụng Optional để xác nhận người dùng chọn OK hoặc Cancel
                 alert.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
                         try {
@@ -274,7 +280,7 @@ public class DSMayTinhController implements Initializable {
     }
 
 
-    public void LamMoi(){
+    public void LamMoi() {
         MMayTF.setText(null);
         BaoHanhTF.setText(null);
         NgayMuaTF.setValue(null);

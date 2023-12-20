@@ -1,6 +1,7 @@
 package DAL;
 
 import BLL.InFoMayTinh.MayTinh;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,8 +17,7 @@ public class MayTinhDAO {
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
-        )
-        {
+        ) {
             while (rs.next()) {
                 MayTinh mt = new MayTinh();
                 mt.setMaMay(rs.getString("MAMAY"));
@@ -32,13 +32,13 @@ public class MayTinhDAO {
             return lstMayTinh;
         }
     }
+
     public static MayTinh findByMamay(String maMay) throws Exception {
         String sql = "SELECT * FROM MAYTINH WHERE MAMAY = ?";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);
-        )
-        {
+        ) {
             pstm.setString(1, maMay);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
@@ -55,13 +55,13 @@ public class MayTinhDAO {
             return null;
         }
     }
+
     public static void insertMayTinh(MayTinh mayTinh) throws Exception {
         String sql = "INSERT INTO MAYTINH (MAMAY, BAOHANH, NGAYMUA, THOIGIANDUNG, COSAN, TRANGTHAI, PHONG) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);
-        )
-        {
+        ) {
             pstm.setString(1, mayTinh.getMaMay());
             pstm.setInt(2, mayTinh.getBaoHanh());
             pstm.setDate(3, new java.sql.Date(mayTinh.getNgayMua().getTime()));
@@ -78,6 +78,7 @@ public class MayTinhDAO {
             }
         }
     }
+
     public static void deleteMayTinh(MayTinh mayTinh) throws Exception {
         String sql = "DELETE FROM MAYTINH WHERE MAMAY = ? AND PHONG = ?";
         try (
@@ -95,6 +96,7 @@ public class MayTinhDAO {
             }
         }
     }
+
     public static void CapNhatMayTinh(MayTinh mayTinh) throws Exception {
         String sql = "UPDATE MAYTINH SET BAOHANH = ?, NGAYMUA = ?, THOIGIANDUNG = ?, COSAN = ?, TRANGTHAI = ? WHERE MAMAY = ? AND PHONG = ?";
         try (

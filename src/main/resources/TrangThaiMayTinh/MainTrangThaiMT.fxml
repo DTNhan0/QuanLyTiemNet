@@ -9,59 +9,66 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.TrangThaiMT.TrangThaiMTController">
-   <children>
-      <BorderPane fx:id="ChuyenPhong" prefHeight="600.0" prefWidth="1000.0" styleClass="MainColor" stylesheets="@../CSS/MainGiaoDien.css">
-         <top>
-            <HBox prefHeight="35.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
-               <children>
-                  <JFXComboBox fx:id="LoaiPhong" focusColor="BLACK" onAction="#chonPhong" prefHeight="35.0" prefWidth="190.0" unFocusColor="BLACK" />
-                  <AnchorPane prefHeight="35.0" prefWidth="30.0" />
-                  <JFXButton prefHeight="30.0" prefWidth="190.0" stylesheets="@../CSS/ButtonXin.css" text="ĐANG TRỐNG" textFill="WHITE">
-                     <styleClass>
-                        <String fx:value="Button" />
-                        <String fx:value="MenuColor" />
-                     </styleClass>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </JFXButton>
-                  <AnchorPane prefHeight="35.0" prefWidth="30.0" />
-                  <JFXButton prefHeight="30.0" prefWidth="190.0" stylesheets="@../CSS/ButtonXin.css" text="ĐANG ONLINE" textFill="WHITE">
-                     <styleClass>
-                        <String fx:value="Button" />
-                        <String fx:value="MenuColor" />
-                     </styleClass>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </JFXButton>
-                  <AnchorPane prefHeight="35.0" prefWidth="30.0" />
-                  <JFXButton prefHeight="30.0" prefWidth="190.0" stylesheets="@../CSS/ButtonXin.css" text="BỊ HỎNG" textFill="WHITE">
-                     <styleClass>
-                        <String fx:value="Button" />
-                        <String fx:value="MenuColor" />
-                     </styleClass>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </JFXButton>
-                  <AnchorPane prefHeight="35.0" prefWidth="30.0" />
-                  <JFXButton prefHeight="30.0" prefWidth="190.0" stylesheets="@../CSS/ButtonXin.css" text="ĐANG BẢO TRÌ" textFill="WHITE">
-                     <styleClass>
-                        <String fx:value="Button" />
-                        <String fx:value="MenuColor" />
-                     </styleClass>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </HBox>
-         </top>
-         <center>
-            <AnchorPane BorderPane.alignment="CENTER" />
-         </center>
-      </BorderPane>
-   </children>
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="GUI.TrangThaiMT.TrangThaiMTController">
+    <children>
+        <BorderPane fx:id="ChuyenPhong" prefHeight="600.0" prefWidth="1000.0" styleClass="MainColor"
+                    stylesheets="@../CSS/MainGiaoDien.css">
+            <top>
+                <HBox prefHeight="35.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <JFXComboBox fx:id="LoaiPhong" focusColor="BLACK" onAction="#chonPhong" prefHeight="35.0"
+                                     prefWidth="190.0" unFocusColor="BLACK"/>
+                        <AnchorPane prefHeight="35.0" prefWidth="30.0"/>
+                        <JFXButton prefHeight="30.0" prefWidth="190.0" stylesheets="@../CSS/ButtonXin.css"
+                                   text="ĐANG TRỐNG" textFill="WHITE">
+                            <styleClass>
+                                <String fx:value="Button"/>
+                                <String fx:value="MenuColor"/>
+                            </styleClass>
+                            <font>
+                                <Font name="System Bold" size="12.0"/>
+                            </font>
+                        </JFXButton>
+                        <AnchorPane prefHeight="35.0" prefWidth="30.0"/>
+                        <JFXButton prefHeight="30.0" prefWidth="190.0" stylesheets="@../CSS/ButtonXin.css"
+                                   text="ĐANG ONLINE" textFill="WHITE">
+                            <styleClass>
+                                <String fx:value="Button"/>
+                                <String fx:value="MenuColor"/>
+                            </styleClass>
+                            <font>
+                                <Font name="System Bold" size="12.0"/>
+                            </font>
+                        </JFXButton>
+                        <AnchorPane prefHeight="35.0" prefWidth="30.0"/>
+                        <JFXButton prefHeight="30.0" prefWidth="190.0" stylesheets="@../CSS/ButtonXin.css"
+                                   text="BỊ HỎNG" textFill="WHITE">
+                            <styleClass>
+                                <String fx:value="Button"/>
+                                <String fx:value="MenuColor"/>
+                            </styleClass>
+                            <font>
+                                <Font name="System Bold" size="12.0"/>
+                            </font>
+                        </JFXButton>
+                        <AnchorPane prefHeight="35.0" prefWidth="30.0"/>
+                        <JFXButton prefHeight="30.0" prefWidth="190.0" stylesheets="@../CSS/ButtonXin.css"
+                                   text="ĐANG BẢO TRÌ" textFill="WHITE">
+                            <styleClass>
+                                <String fx:value="Button"/>
+                                <String fx:value="MenuColor"/>
+                            </styleClass>
+                            <font>
+                                <Font name="System Bold" size="12.0"/>
+                            </font>
+                        </JFXButton>
+                    </children>
+                </HBox>
+            </top>
+            <center>
+                <AnchorPane BorderPane.alignment="CENTER"/>
+            </center>
+        </BorderPane>
+    </children>
 </StackPane>
