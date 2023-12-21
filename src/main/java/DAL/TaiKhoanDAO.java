@@ -9,7 +9,7 @@ import java.util.List;
 public class TaiKhoanDAO {
     public List<TaiKhoan> getAll() throws Exception {
         List<TaiKhoan> lstTaiKhoan = new ArrayList<>();
-        String sql = "SELECT * FROM TAIKHOAN";
+        String sql = "SELECT * FROM TAIKHOAN WHERE TONTAI = 1";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
                 Statement stmt = con.createStatement();
@@ -64,7 +64,7 @@ public class TaiKhoanDAO {
     }
 
     public void XoaTaiKhoanDBS(TaiKhoan tk) {
-        String sql = "DELETE FROM TAIKHOAN WHERE USERNAME = ? AND SDT = ?";
+        String sql = "UPDATE TAIKHOAN SET TONTAI = 0 WHERE USERNAME = ? AND SDT = ?";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);
@@ -111,7 +111,7 @@ public class TaiKhoanDAO {
     }
 
     public TaiKhoan findByUsernameAndSdt(String username, String password) throws Exception {
-        String sql = "SELECT * FROM TAIKHOAN WHERE USERNAME = ? AND PASSWORD = ?";
+        String sql = "SELECT * FROM TAIKHOAN WHERE USERNAME = ? AND PASSWORD = ? AND TONTAI = 1";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);

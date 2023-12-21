@@ -2,7 +2,7 @@ package BLL.InFoTaiKhoan;
 
 public class TaiKhoan {
     private String Username, Password, Sdt, Hangthanhvien;
-    private boolean Role, DangSD;
+    private boolean Role, DangSD, TonTai;
     private int Sophutdadung;
     private double SotienTichLuy, SoTienConLai;
 
@@ -52,6 +52,14 @@ public class TaiKhoan {
 
     public void setDangSD(boolean dangSD) {
         DangSD = dangSD;
+    }
+
+    public boolean isTonTai() {
+        return TonTai;
+    }
+
+    public void setTonTai(boolean tonTai) {
+        TonTai = tonTai;
     }
 
     public int getSophutdadung() {
