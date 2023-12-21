@@ -12,416 +12,338 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="MainColor" stylesheets="@../CSS/MainGiaoDien.css"
-            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="GUI.TrangThaiMT.Phong_VIP_Controller">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="MainColor" stylesheets="@../CSS/MainGiaoDien.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.TrangThaiMT.Phong_VIP_Controller">
     <children>
-        <FlowPane layoutX="300.0" layoutY="93.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                  minWidth="-Infinity" prefHeight="320.0" prefWidth="1000.0" AnchorPane.bottomAnchor="280.0"
-                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <FlowPane layoutX="300.0" layoutY="93.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="1000.0" AnchorPane.bottomAnchor="280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 001"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 037" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May001" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May001" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 002"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 038" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May002" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May002" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 003"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 039" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May003" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May003" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 004"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 040" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May004" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May004" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 005"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 041" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May005" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May005" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 006"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 042" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May006" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May006" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 007"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 043" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May007" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May007" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 008"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 044" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May008" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May008" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 009"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 045" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May009" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May009" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 010"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 046" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May010" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May010" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 011"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 047" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May011" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May011" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 012"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 048" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May012" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May012" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 013"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 049" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May013" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May013" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 014"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 050" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May014" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May014" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 015"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 051" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May015" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May015" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 016"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 052" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May016" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May016" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 017"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 053" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May017" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May017" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
-                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0"
-                                   styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 018"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 054" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Icon/PhongVIP.png"/>
+                                        <Image url="@../Icon/PhongVIP.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <Circle fx:id="May018" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false"
-                                stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"/>
+                        <Circle fx:id="May018" fill="#969696" layoutX="79.0" layoutY="69.0" radius="6.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
             </children>
         </FlowPane>
-        <AnchorPane layoutY="400.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="400.0">
+        <AnchorPane layoutY="400.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="400.0">
             <children>
-                <AnchorPane layoutY="34.0" prefHeight="166.0" prefWidth="1000.0" style="-fx-background-color: WHITE;"
-                            stylesheets="@../CSS/MainGiaoDien.css" AnchorPane.bottomAnchor="0.0"
-                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                <AnchorPane layoutY="34.0" prefHeight="166.0" prefWidth="1000.0" style="-fx-background-color: WHITE;" stylesheets="@../CSS/MainGiaoDien.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
                     <children>
                         <Label layoutX="32.0" layoutY="14.0" prefHeight="40.0" prefWidth="101.0" text="Username:">
                             <font>
-                                <Font size="20.0"/>
+                                <Font size="20.0" />
                             </font>
                         </Label>
                         <Label layoutX="32.0" layoutY="59.0" prefHeight="40.0" prefWidth="47.0" text="SĐT:">
                             <font>
-                                <Font size="20.0"/>
+                                <Font size="20.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="UserTF" disable="true" layoutX="151.0" layoutY="22.0" prefHeight="25.0"
-                                   prefWidth="230.0"/>
-                        <TextField fx:id="SdtTF" disable="true" layoutX="151.0" layoutY="66.0" prefHeight="25.0"
-                                   prefWidth="230.0"/>
+                        <TextField fx:id="UserTF" disable="true" layoutX="151.0" layoutY="22.0" prefHeight="25.0" prefWidth="230.0" />
+                        <TextField fx:id="SdtTF" disable="true" layoutX="151.0" layoutY="66.0" prefHeight="25.0" prefWidth="230.0" />
                         <Label layoutX="32.0" layoutY="101.0" prefHeight="40.0" prefWidth="101.0" text="Password:">
                             <font>
-                                <Font size="20.0"/>
+                                <Font size="20.0" />
                             </font>
                         </Label>
-                        <PasswordField fx:id="PassTF" disable="true" layoutX="151.0" layoutY="109.0" prefHeight="25.0"
-                                       prefWidth="230.0"/>
+                        <PasswordField fx:id="PassTF" disable="true" layoutX="151.0" layoutY="109.0" prefHeight="25.0" prefWidth="230.0" />
                         <Label layoutX="464.0" layoutY="15.0" prefHeight="40.0" prefWidth="109.0" text="Đang chọn:">
                             <font>
-                                <Font size="20.0"/>
+                                <Font size="20.0" />
                             </font>
                         </Label>
-                        <Separator layoutX="721.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="200.0"
-                                   AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-                        <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                        <Label fx:id="HienIDMay" layoutX="569.0" layoutY="15.0" prefHeight="40.0" prefWidth="122.0"
-                               text="NULL">
+                        <Separator layoutX="721.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <Label fx:id="HienIDMay" layoutX="569.0" layoutY="15.0" prefHeight="40.0" prefWidth="122.0" text="NULL">
                             <font>
-                                <Font size="20.0"/>
+                                <Font size="20.0" />
                             </font>
                         </Label>
-                        <JFXButton fx:id="BiHongBT" disable="true" layoutX="783.0" layoutY="15.0" onAction="#KhiBiHong"
-                                   prefHeight="39.0" prefWidth="160.0" styleClass="ButtonThuong"
-                                   stylesheets="@../CSS/ButtonXin.css" text="Bị hỏng">
+                        <JFXButton fx:id="BiHongBT" disable="true" layoutX="783.0" layoutY="15.0" onAction="#KhiBiHong" prefHeight="39.0" prefWidth="160.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css" text="Bị hỏng">
                             <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                             </font>
                         </JFXButton>
-                        <JFXButton fx:id="DangBaoTriBT" disable="true" layoutX="783.0" layoutY="64.0"
-                                   onAction="#KhiBaoTri" prefHeight="39.0" prefWidth="160.0" styleClass="ButtonThuong"
-                                   stylesheets="@../CSS/ButtonXin.css" text="Bảo trì">
+                        <JFXButton fx:id="DangBaoTriBT" disable="true" layoutX="783.0" layoutY="64.0" onAction="#KhiBaoTri" prefHeight="39.0" prefWidth="160.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css" text="Bảo trì">
                             <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                             </font>
                         </JFXButton>
-                        <JFXButton fx:id="CoSanBT" disable="true" layoutX="783.0" layoutY="115.0" onAction="#KhiCoSan"
-                                   prefHeight="39.0" prefWidth="160.0" styleClass="ButtonThuong"
-                                   stylesheets="@../CSS/ButtonXin.css" text="Có Sẵn">
+                        <JFXButton fx:id="CoSanBT" disable="true" layoutX="783.0" layoutY="115.0" onAction="#KhiCoSan" prefHeight="39.0" prefWidth="160.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css" text="Có Sẵn">
                             <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                             </font>
                         </JFXButton>
-                        <JFXButton fx:id="KetNoiBT" disable="true" layoutX="464.0" layoutY="59.0" prefHeight="39.0"
-                                   prefWidth="166.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css"
-                                   text="Kết nối">
+                        <JFXButton fx:id="KetNoiBT" disable="true" layoutX="464.0" layoutY="59.0" prefHeight="39.0" prefWidth="166.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css" text="Kết nối">
                             <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                             </font>
                         </JFXButton>
-                        <JFXButton fx:id="LamMoiBT" layoutX="464.0" layoutY="109.0" onAction="#LamMoi" prefHeight="39.0"
-                                   prefWidth="166.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css"
-                                   text="Làm mới">
+                        <JFXButton fx:id="LamMoiBT" layoutX="464.0" layoutY="109.0" onAction="#LamMoi" prefHeight="39.0" prefWidth="166.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css" text="Làm mới">
                             <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                             </font>
                         </JFXButton>
                     </children>
                 </AnchorPane>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="NhapNDHong" layoutX="8.0" layoutY="320.0" prefHeight="114.0" prefWidth="730.0"
-                    style="-fx-background-color: WHITE;" visible="false" AnchorPane.leftAnchor="0.0">
+        <AnchorPane fx:id="NhapNDHong" layoutX="8.0" layoutY="320.0" prefHeight="114.0" prefWidth="730.0" style="-fx-background-color: WHITE;" visible="false" AnchorPane.leftAnchor="0.0">
             <children>
                 <Label layoutX="26.0" layoutY="44.0" text="NỘI DUNG BỊ HỎNG:">
                     <font>
-                        <Font size="17.0"/>
+                        <Font size="17.0" />
                     </font>
                 </Label>
-                <TextField fx:id="NDhong" layoutX="197.0" layoutY="9.0" prefHeight="96.0" prefWidth="300.0"/>
-                <JFXButton fx:id="ImportNDHongBT" layoutX="536.0" layoutY="38.0" prefHeight="39.0" prefWidth="166.0"
-                           styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css" text="Import">
+                <TextField fx:id="NDhong" layoutX="197.0" layoutY="9.0" prefHeight="96.0" prefWidth="300.0" />
+                <JFXButton fx:id="ImportNDHongBT" layoutX="536.0" layoutY="38.0" prefHeight="39.0" prefWidth="166.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css" text="Import">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                 </JFXButton>
             </children>

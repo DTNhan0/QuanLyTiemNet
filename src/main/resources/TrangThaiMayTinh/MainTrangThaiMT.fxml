@@ -1,73 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="GUI.TrangThaiMT.TrangThaiMTController">
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.TrangThaiMT.TrangThaiMTController">
     <children>
-        <BorderPane fx:id="ChuyenPhong" prefHeight="600.0" prefWidth="1000.0" styleClass="MainColor"
-                    stylesheets="@../CSS/MainGiaoDien.css">
+        <BorderPane fx:id="ChuyenPhong" prefHeight="600.0" prefWidth="1000.0" styleClass="MainColor" stylesheets="@../CSS/MainGiaoDien.css">
             <top>
                 <HBox prefHeight="35.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                     <children>
-                        <JFXComboBox fx:id="LoaiPhong" focusColor="BLACK" onAction="#chonPhong" prefHeight="35.0"
-                                     prefWidth="190.0" unFocusColor="BLACK"/>
-                        <AnchorPane prefHeight="35.0" prefWidth="30.0"/>
-                        <JFXButton prefHeight="30.0" prefWidth="190.0" stylesheets="@../CSS/ButtonXin.css"
-                                   text="ĐANG TRỐNG" textFill="WHITE">
-                            <styleClass>
-                                <String fx:value="Button"/>
-                                <String fx:value="MenuColor"/>
-                            </styleClass>
-                            <font>
-                                <Font name="System Bold" size="12.0"/>
-                            </font>
-                        </JFXButton>
-                        <AnchorPane prefHeight="35.0" prefWidth="30.0"/>
-                        <JFXButton prefHeight="30.0" prefWidth="190.0" stylesheets="@../CSS/ButtonXin.css"
-                                   text="ĐANG ONLINE" textFill="WHITE">
-                            <styleClass>
-                                <String fx:value="Button"/>
-                                <String fx:value="MenuColor"/>
-                            </styleClass>
-                            <font>
-                                <Font name="System Bold" size="12.0"/>
-                            </font>
-                        </JFXButton>
-                        <AnchorPane prefHeight="35.0" prefWidth="30.0"/>
-                        <JFXButton prefHeight="30.0" prefWidth="190.0" stylesheets="@../CSS/ButtonXin.css"
-                                   text="BỊ HỎNG" textFill="WHITE">
-                            <styleClass>
-                                <String fx:value="Button"/>
-                                <String fx:value="MenuColor"/>
-                            </styleClass>
-                            <font>
-                                <Font name="System Bold" size="12.0"/>
-                            </font>
-                        </JFXButton>
-                        <AnchorPane prefHeight="35.0" prefWidth="30.0"/>
-                        <JFXButton prefHeight="30.0" prefWidth="190.0" stylesheets="@../CSS/ButtonXin.css"
-                                   text="ĐANG BẢO TRÌ" textFill="WHITE">
-                            <styleClass>
-                                <String fx:value="Button"/>
-                                <String fx:value="MenuColor"/>
-                            </styleClass>
-                            <font>
-                                <Font name="System Bold" size="12.0"/>
-                            </font>
-                        </JFXButton>
+                        <JFXComboBox fx:id="LoaiPhong" focusColor="BLACK" onAction="#chonPhong" prefHeight="35.0" prefWidth="190.0" unFocusColor="BLACK" />
+                  <AnchorPane prefHeight="35.0" prefWidth="35.0" />
+                  <AnchorPane prefHeight="35.0" prefWidth="100.0" styleClass="MenuColor" stylesheets="@../CSS/MainGiaoDien.css">
+                     <children>
+                        <Label layoutX="14.0" layoutY="9.0" text="Có sẵn:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Circle fill="#969696" layoutX="80.0" layoutY="20.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="35.0" prefWidth="35.0" />
+                  <AnchorPane prefHeight="35.0" prefWidth="140.0" styleClass="MenuColor" stylesheets="@../CSS/MainGiaoDien.css">
+                     <children>
+                        <Label layoutX="14.0" layoutY="9.0" text="Đang Online:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Circle fill="#00ff48" layoutX="120.0" layoutY="20.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="35.0" prefWidth="35.0" />
+                  <AnchorPane prefHeight="35.0" prefWidth="99.0" styleClass="MenuColor" stylesheets="@../CSS/MainGiaoDien.css">
+                     <children>
+                        <Label layoutX="14.0" layoutY="9.0" text="Bảo trì:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Circle fill="#fff300" layoutX="82.0" layoutY="20.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="35.0" prefWidth="35.0" />
+                  <AnchorPane prefHeight="35.0" prefWidth="100.0" styleClass="MenuColor" stylesheets="@../CSS/MainGiaoDien.css">
+                     <children>
+                        <Label layoutX="14.0" layoutY="9.0" text="Bị hỏng:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Circle fill="RED" layoutX="85.0" layoutY="21.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                     </children>
+                  </AnchorPane>
                     </children>
                 </HBox>
             </top>
             <center>
-                <AnchorPane BorderPane.alignment="CENTER"/>
+                <AnchorPane BorderPane.alignment="CENTER" />
             </center>
         </BorderPane>
     </children>
