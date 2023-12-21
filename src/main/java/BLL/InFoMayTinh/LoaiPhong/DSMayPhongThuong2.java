@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DSMayPhongThuong2 {
-    static List<MayTinh> DSMayPhong2;
-
-    static {
+    List <MayTinh> DSMayPhong2;
+    {
         try {
             DSMayPhong2 = new DanhSachMT().LayDSMayTheoPhong("T02");
         } catch (Exception e) {
@@ -25,10 +24,6 @@ public class DSMayPhongThuong2 {
         this.DSMayPhong2 = DSMayPhong1;
     }
 
-    public DSMayPhongThuong2() throws Exception {
-        System.out.println("Không thể lấy các máy nằm ở phòng T01!!! ");
-    }
-
     public List<MayTinh> HienCacMayDangOnl() {
         List<MayTinh> CacMayONL = new ArrayList<>();
         for (MayTinh mt : DSMayPhong2) {
@@ -38,5 +33,4 @@ public class DSMayPhongThuong2 {
         }
         return CacMayONL;
     }
-
 }

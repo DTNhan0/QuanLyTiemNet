@@ -1,6 +1,5 @@
 package GUI.TrangThaiMT;
 
-import BLL.InFoMayTinh.LoaiPhong.DSMayPhongThuong1;
 import BLL.InFoMayTinh.LoaiPhong.DSMayPhongThuong2;
 import BLL.InFoMayTinh.MayTinh;
 import com.jfoenix.controls.JFXButton;

@@ -1,7 +1,6 @@
 package GUI.TrangThaiMT;
 
-import BLL.InFoMayTinh.LoaiPhong.DSMayPhongThuong2;
-import BLL.InFoMayTinh.LoaiPhong.DSMayPhongThuongVIP;
+import BLL.InFoMayTinh.LoaiPhong.DSMayPhongVIP;
 import BLL.InFoMayTinh.MayTinh;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
@@ -25,7 +24,7 @@ public class Phong_VIP_Controller implements Initializable {
 
     {
         try {
-            DSMay = new DSMayPhongThuongVIP().getDSMayPhongVIP();
+            DSMay = new DSMayPhongVIP().getDSMayPhongVIP();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

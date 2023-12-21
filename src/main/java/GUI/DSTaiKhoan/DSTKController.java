@@ -125,7 +125,6 @@ public class DSTKController implements Initializable {
 
                 BangDSKH.getSelectionModel().clearSelection();
         }
-
         @FXML
         public void capNhatTaiKhoan() {
                 int selectedIndex = BangDSKH.getSelectionModel().getSelectedIndex();
@@ -154,7 +153,6 @@ public class DSTKController implements Initializable {
                     showAlert("Lỗi!!!", "Vui lòng chọn một tài khoản để cập nhật.", Alert.AlertType.ERROR);
                 }
         }
-
         @FXML
         public void themTaiKhoan() {
                 boolean checkAdmin = NutAdmin.isSelected();
@@ -168,7 +166,6 @@ public class DSTKController implements Initializable {
                         showAlert("Thông báo", "Tài khoản đã được thêm thành công!", Alert.AlertType.INFORMATION);
                 }
         }
-
         @FXML
         public void xoaTaiKhoan() {
         int selectedIndex = BangDSKH.getSelectionModel().getSelectedIndex();
@@ -193,7 +190,6 @@ public class DSTKController implements Initializable {
             showAlert("Lỗi!!!", "Vui lòng chọn một tài khoản để xóa.", Alert.AlertType.ERROR);
         }
         }
-
         private void hienThiThongTinTaiKhoan(TaiKhoan tk) {
                 TaiKhoan dangnhap = new DanhSachTK().getTaiKhoanDangNhap();
                 HangTVTF.setText(tk.getHangthanhvien());
@@ -243,7 +239,6 @@ public class DSTKController implements Initializable {
                         NapTienBT.setDisable(false);
                 }
         }
-
         public void NapTien(){
                 if(SoTienNapTF.getText().isEmpty()){
                         showAlert("Lỗi!!!", "Không được để trống phần nạp tiền!!!", Alert.AlertType.ERROR);
@@ -255,7 +250,6 @@ public class DSTKController implements Initializable {
                         BangDSKH.refresh();
                 }
         }
-
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
                 BangDSKH.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {

@@ -6,10 +6,9 @@ import BLL.InFoMayTinh.MayTinh;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DSMayPhongThuongVIP {
-    static List<MayTinh> DSMayPhongVIP;
-
-    static {
+public class DSMayPhongVIP {
+    List <MayTinh> DSMayPhongVIP;
+    {
         try {
             DSMayPhongVIP = new DanhSachMT().LayDSMayTheoPhong("VIP01");
         } catch (Exception e) {
@@ -21,12 +20,8 @@ public class DSMayPhongThuongVIP {
         return DSMayPhongVIP;
     }
 
-    public void setDSMayPhong1(List<MayTinh> DSMayPhong1) {
-        this.DSMayPhongVIP = DSMayPhong1;
-    }
-
-    public DSMayPhongThuongVIP() throws Exception {
-        System.out.println("Không thể lấy các máy nằm ở phòng T01!!! ");
+    public void setDSMayPhong1(List<MayTinh> DSMayPhongVIP) {
+        this.DSMayPhongVIP = DSMayPhongVIP;
     }
 
     public List<MayTinh> HienCacMayDangOnl() {

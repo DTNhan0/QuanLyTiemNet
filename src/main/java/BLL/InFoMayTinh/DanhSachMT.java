@@ -6,26 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DanhSachMT {
-    static List<MayTinh> DanhSachMay;
-
-    static {
+    List <MayTinh> DSMayTinh;
+    {
         try {
-            DanhSachMay = new MayTinhDAO().getAll();
+            DSMayTinh = new MayTinhDAO().getAll();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
-    public List<MayTinh> getDanhSachMay() {
-        return DanhSachMay;
+    public List<MayTinh> getDSMayTinh() {
+        return DSMayTinh;
     }
-
-    public void setDanhSachMay(List<MayTinh> danhSachMay) {
-        DanhSachMay = danhSachMay;
+    public void setDSMayTinh(List<MayTinh> DSMayTinh) {
+        this.DSMayTinh = DSMayTinh;
     }
-
     public List<MayTinh> LayDSMayTheoPhong(String phong) throws Exception {
-        List<MayTinh> ds = new DanhSachMT().getDanhSachMay();
+        List<MayTinh> ds = new DanhSachMT().getDSMayTinh();
         List<MayTinh> DSMayTheoPhong = new ArrayList<>();
         for (MayTinh mt : ds) {
             if (mt.getPhong().equals(phong)) {
@@ -34,13 +30,9 @@ public class DanhSachMT {
         }
         return DSMayTheoPhong;
     }
-
-    public DanhSachMT() throws Exception {
-    }
-
-    public static int TimMay(String maMay, String phong) {
-        for (int i = 0; i < DanhSachMay.size(); i++) {
-            MayTinh may = DanhSachMay.get(i);
+    public int TimMay(String maMay, String phong) {
+        for (int i = 0; i < DSMayTinh.size(); i++) {
+            MayTinh may = DSMayTinh.get(i);
             if (may.getMaMay().equals(maMay) && may.getPhong().equals(phong)) {
                 return i;
             }
@@ -48,28 +40,29 @@ public class DanhSachMT {
         return -1;
     }
 
-    public static void ThemMay(MayTinh may) throws Exception {
-        DanhSachMay.add(may);
+    public void ThemMay(MayTinh may) throws Exception {
+        DSMayTinh.add(may);
         MayTinhDAO.insertMayTinh(may);
     }
 
-    public static void XoaMay(MayTinh mayTinh) throws Exception {
+    public void XoaMay(MayTinh mayTinh) throws Exception {
         int index_MayXoa = TimMay(mayTinh.getMaMay(), mayTinh.getPhong());
-        if (index_MayXoa != -1 && DanhSachMay.get(index_MayXoa).getPhong().equals(mayTinh.getPhong())) {
-            DanhSachMay.remove(index_MayXoa);
+        if (index_MayXoa != -1 && DSMayTinh.get(index_MayXoa).getPhong().equals(mayTinh.getPhong())) {
+            DSMayTinh.remove(index_MayXoa);
             MayTinhDAO.deleteMayTinh(mayTinh);
         } else {
             System.out.println("Lỗi không tìm thấy máy có mã: " + mayTinh.getMaMay() + "và thuộc phòng: " + mayTinh.getPhong());
         }
     }
 
-    public static void CapNhatMay(MayTinh may) throws Exception {
+    public void CapNhatMay(MayTinh may) throws Exception {
         int indexCapNhat = TimMay(may.getMaMay(), may.getPhong());
         if (indexCapNhat != -1) {
-            DanhSachMay.set(indexCapNhat, may);
+            DSMayTinh.set(indexCapNhat, may);
             MayTinhDAO.CapNhatMayTinh(may);
         } else {
             System.out.println("Failed to update MayTinh. MayTinh not found with MAMAY: " + may.getMaMay() + " in PHONG: " + may.getPhong());
         }
     }
+
 }

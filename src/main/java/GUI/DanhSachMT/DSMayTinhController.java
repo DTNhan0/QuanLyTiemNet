@@ -16,15 +16,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class DSMayTinhController implements Initializable {
-    DanhSachMT DBSMayTinh;
-
-    {
-        try {
-            DBSMayTinh = new DanhSachMT();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+    List <MayTinh> DSMayTinh = new DanhSachMT().getDSMayTinh();
 
     @FXML
     private TableView<MayTinh> BangDSMT;
@@ -73,7 +65,13 @@ public class DSMayTinhController implements Initializable {
 
     @FXML
     private JFXButton XoaBT;
-
+    public void CapNhatLaiTableView(){
+        DSMayTinh = new DanhSachMT().getDSMayTinh();
+        // Cập nhật lại TableView
+        BangDSMT.getItems().clear();
+        BangDSMT.getItems().addAll(DSMayTinh);
+        BangDSMT.refresh();
+    }
     private DatePicker convertToDatePicker(Date date) {
         if (date != null) {
             LocalDate localDate = date.toLocalDate();
@@ -123,12 +121,11 @@ public class DSMayTinhController implements Initializable {
         PhongCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhong()));
 
         try {
-            BangDSMT.getItems().addAll(new DanhSachMT().getDanhSachMay());
+            BangDSMT.getItems().addAll(DSMayTinh);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
     public void ThemMay() {
         String Mamay = MMayTF.getText();
         String BaoHanhText = BaoHanhTF.getText();
@@ -160,12 +157,10 @@ public class DSMayTinhController implements Initializable {
 
             MayTinh mt = new MayTinh(Mamay, Phong, BaoHanh, 0, true, false, NgayMua);
 
-            // Thêm máy vào DSMT
-            BangDSMT.getItems().add(mt);
-
             // Thêm máy vào DBS
             try {
-                DBSMayTinh.ThemMay(mt);
+                new DanhSachMT().ThemMay(mt);
+                CapNhatLaiTableView();
             } catch (Exception e) {
                 System.out.println("Lỗi thêm máy vào DBS");
             }
@@ -177,24 +172,14 @@ public class DSMayTinhController implements Initializable {
             alert.showAndWait();
         }
     }
-
     private boolean CheckMayTonTaiTrongPhong(String maMay, String phong) {
-        List<MayTinh> danhSachMayTrongPhong;
-        try {
-            danhSachMayTrongPhong = DBSMayTinh.LayDSMayTheoPhong(phong);
-        } catch (Exception e) {
-            System.out.println("Lỗi truy vấn danh sách máy trong phòng");
-            return false;
-        }
-
-        for (MayTinh may : danhSachMayTrongPhong) {
+        for (MayTinh may : DSMayTinh) {
             if (may.getMaMay().equals(maMay)) {
                 return true; // Mã máy đã tồn tại trong phòng
             }
         }
         return false; // Mã máy chưa tồn tại trong phòng
     }
-
     public void XoaMay() {
         if (BangDSMT.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -206,17 +191,14 @@ public class DSMayTinhController implements Initializable {
             MayTinh mt = BangDSMT.getSelectionModel().getSelectedItem();
             try {
                 // Xóa máy trên Database
-                DBSMayTinh.XoaMay(mt);
-
-                // Xóa máy khỏi TableView
-                BangDSMT.getItems().remove(mt);
+                new DanhSachMT().XoaMay(mt);
+                CapNhatLaiTableView();
             } catch (Exception e) {
                 System.out.println("Xóa máy trên Database thất bại!!!");
             }
             BangDSMT.refresh();
         }
     }
-
     public void CapNhatMay() {
         if (BangDSMT.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -260,11 +242,11 @@ public class DSMayTinhController implements Initializable {
                 alert.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
                         try {
-                            DBSMayTinh.CapNhatMay(mt);
+                            new DanhSachMT().CapNhatMay(mayTinh);
+                            CapNhatLaiTableView();
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
-                        BangDSMT.getItems().set(selectedRowIndex, mt);
                         BangDSMT.refresh();
                     }
                 });
@@ -278,8 +260,6 @@ public class DSMayTinhController implements Initializable {
 
         }
     }
-
-
     public void LamMoi() {
         MMayTF.setText(null);
         BaoHanhTF.setText(null);

@@ -6,10 +6,9 @@ import BLL.InFoMayTinh.MayTinh;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DSMayPhongThuong1 extends DanhSachMT {
-    static List<MayTinh> DSMayPhong1;
-
-    static {
+public class DSMayPhongThuong1 {
+    List <MayTinh> DSMayPhong1;
+    {
         try {
             DSMayPhong1 = new DanhSachMT().LayDSMayTheoPhong("T01");
         } catch (Exception e) {
@@ -25,10 +24,6 @@ public class DSMayPhongThuong1 extends DanhSachMT {
         this.DSMayPhong1 = DSMayPhong1;
     }
 
-    public DSMayPhongThuong1() throws Exception {
-        System.out.println("Không thể lấy các máy nằm ở phòng T01!!! ");
-    }
-
     public List<MayTinh> HienCacMayDangOnl() {
         List<MayTinh> CacMayONL = new ArrayList<>();
         for (MayTinh mt : DSMayPhong1) {
@@ -38,5 +33,4 @@ public class DSMayPhongThuong1 extends DanhSachMT {
         }
         return CacMayONL;
     }
-
 }
