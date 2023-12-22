@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import mainscript.quanlytiemnet.MainController;
 
 import java.lang.reflect.Field;
 import java.net.URL;
@@ -19,7 +20,6 @@ import java.util.ResourceBundle;
 
 public class Phong_thuong_1_Controller implements Initializable {
     List<MayTinh> DSMay;
-
     {
         try {
             DSMay = new DSMayPhongThuong1().getDSMayPhong1();
@@ -115,7 +115,11 @@ public class Phong_thuong_1_Controller implements Initializable {
     @FXML
     private TextField UserTF;
     private String selectedIDMayFormat;
-
+    public static String chuyenChuoi(String input) {
+        // Loại bỏ khoảng trắng và thay thế ký tự "Máy" thành "May"
+        String result = input.replaceAll("\\s+", "").replace("Máy", "May");
+        return result;
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         for (MayTinh mt : DSMay) {
@@ -202,17 +206,16 @@ public class Phong_thuong_1_Controller implements Initializable {
         HienThiThongTinNhap(e);
         JFXButton clickedButton = (JFXButton) e.getSource();
         String IDMay = clickedButton.getText();
-        String soThuTu = IDMay.substring(4);
         NDhong.setText(null);
         NhapNDHong.setVisible(false);
-
-        selectedIDMayFormat = "May" + soThuTu;
+        selectedIDMayFormat = chuyenChuoi(IDMay);
     }
 
     public void KhiBiHong() throws NoSuchFieldException, IllegalAccessException {
         Circle selectedCircle = getCircleById(selectedIDMayFormat);
         selectedCircle.setFill(javafx.scene.paint.Color.RED);
         NhapNDHong.setVisible(true);
+        new MainController().CapNhatStatus();
     }
 
     public void KhiBaoTri() throws NoSuchFieldException, IllegalAccessException {
@@ -220,6 +223,7 @@ public class Phong_thuong_1_Controller implements Initializable {
         selectedCircle.setFill(Color.YELLOW);
         NhapNDHong.setVisible(false);
         NDhong.setText(null);
+        new MainController().CapNhatStatus();
     }
 
     public void KhiCoSan() throws NoSuchFieldException, IllegalAccessException {
@@ -227,6 +231,7 @@ public class Phong_thuong_1_Controller implements Initializable {
         selectedCircle.setFill(Paint.valueOf("#969696"));
         NhapNDHong.setVisible(false);
         NDhong.setText(null);
+        new MainController().CapNhatStatus();
     }
 
     public void LamMoi() {

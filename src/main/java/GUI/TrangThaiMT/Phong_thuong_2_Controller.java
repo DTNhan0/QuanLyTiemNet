@@ -21,7 +21,6 @@ import java.util.ResourceBundle;
 
 public class Phong_thuong_2_Controller implements Initializable {
     List<MayTinh> DSMay;
-
     {
         try {
             DSMay = new DSMayPhongThuong2().getDSMayPhong2();
@@ -51,58 +50,59 @@ public class Phong_thuong_2_Controller implements Initializable {
     private JFXButton LamMoiBT;
 
     @FXML
-    private Circle May001;
+    private Circle May019;
 
     @FXML
-    private Circle May002;
+    private Circle May020;
 
     @FXML
-    private Circle May003;
+    private Circle May021;
 
     @FXML
-    private Circle May004;
+    private Circle May022;
 
     @FXML
-    private Circle May005;
+    private Circle May023;
 
     @FXML
-    private Circle May006;
+    private Circle May024;
 
     @FXML
-    private Circle May007;
+    private Circle May025;
 
     @FXML
-    private Circle May008;
+    private Circle May026;
 
     @FXML
-    private Circle May009;
+    private Circle May027;
 
     @FXML
-    private Circle May010;
+    private Circle May028;
 
     @FXML
-    private Circle May011;
+    private Circle May029;
 
     @FXML
-    private Circle May012;
+    private Circle May030;
 
     @FXML
-    private Circle May013;
+    private Circle May031;
 
     @FXML
-    private Circle May014;
+    private Circle May032;
 
     @FXML
-    private Circle May015;
+    private Circle May033;
 
     @FXML
-    private Circle May016;
+    private Circle May034;
 
     @FXML
-    private Circle May017;
+    private Circle May035;
 
     @FXML
-    private Circle May018;
+    private Circle May036;
+
     @FXML
     private TextField NDhong;
     @FXML
@@ -117,7 +117,11 @@ public class Phong_thuong_2_Controller implements Initializable {
     @FXML
     private TextField UserTF;
     private String selectedIDMayFormat;
-
+    public static String chuyenChuoi(String input) {
+        // Loại bỏ khoảng trắng và thay thế ký tự "Máy" thành "May"
+        String result = input.replaceAll("\\s+", "").replace("Máy", "May");
+        return result;
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         for (MayTinh mt : DSMay) {
@@ -204,11 +208,10 @@ public class Phong_thuong_2_Controller implements Initializable {
         HienThiThongTinNhap(e);
         JFXButton clickedButton = (JFXButton) e.getSource();
         String IDMay = clickedButton.getText();
-        String soThuTu = IDMay.substring(4);
         NDhong.setText(null);
         NhapNDHong.setVisible(false);
-
-        selectedIDMayFormat = "May" + soThuTu;
+        System.out.println(chuyenChuoi(IDMay));
+        selectedIDMayFormat = chuyenChuoi(IDMay);
     }
 
     public void KhiBiHong() throws NoSuchFieldException, IllegalAccessException {

@@ -240,8 +240,8 @@ public class DSTKController implements Initializable {
                 }
         }
         public void NapTien(){
-                if(SoTienNapTF.getText().isEmpty()){
-                        showAlert("Lỗi!!!", "Không được để trống phần nạp tiền!!!", Alert.AlertType.ERROR);
+                if(BangDSKH.getSelectionModel().isEmpty()){
+                        showAlert("Lỗi!!!", "Vui lòng chọn một tài khoản để nạp!!!", Alert.AlertType.ERROR);
                 }else{
                         TaiKhoan tk = BangDSKH.getSelectionModel().getSelectedItem();
                         showAlert("Nạp tiền thành công!!!", "Bạn đã nạp " + SoTienNapTF.getText() + " thành công vào tk có sđt:" + tk.getSdt(), Alert.AlertType.CONFIRMATION);

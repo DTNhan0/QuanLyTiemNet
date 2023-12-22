@@ -146,7 +146,7 @@ public class DSMayTinhController implements Initializable {
             Date NgayMua = Date.valueOf(ngayMuaValue);
 
             // Kiểm tra xem mã máy đã tồn tại trong phòng hay chưa
-            if (CheckMayTonTaiTrongPhong(Mamay, Phong)) {
+            if (CheckMayTonTai(Mamay, Phong)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Lỗi");
                 alert.setHeaderText(null);
@@ -172,7 +172,7 @@ public class DSMayTinhController implements Initializable {
             alert.showAndWait();
         }
     }
-    private boolean CheckMayTonTaiTrongPhong(String maMay, String phong) {
+    private boolean CheckMayTonTai(String maMay, String phong) {
         for (MayTinh may : DSMayTinh) {
             if (may.getMaMay().equals(maMay)) {
                 return true; // Mã máy đã tồn tại trong phòng

@@ -65,4 +65,23 @@ public class DanhSachMT {
         }
     }
 
+    public int MayDangONL(){
+        int count = 0;
+        for(MayTinh mt : DSMayTinh){
+            if(mt.isCoSan() == false && mt.isTrangThai() == true){
+                count++;
+            }
+        }
+        return count;
+    }
+    public int MayCoSan(){
+        int count = 0;
+        for(MayTinh mt : DSMayTinh){
+            if(mt.isCoSan() == true && mt.isTrangThai() == true){
+                count++;
+            }
+        }
+        return count;
+    }
+
 }

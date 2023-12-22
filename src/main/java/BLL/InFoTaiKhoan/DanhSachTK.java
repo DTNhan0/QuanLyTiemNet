@@ -14,11 +14,11 @@ public class DanhSachTK {
         }
     }
     public static TaiKhoan TaiKhoanDangNhap;
-    public TaiKhoan getTaiKhoanDangNhap() {
+    public static TaiKhoan getTaiKhoanDangNhap() {
         return TaiKhoanDangNhap;
     }
 
-    public void setTaiKhoanDangNhap(TaiKhoan taiKhoanDangNhap) {
+    public static void setTaiKhoanDangNhap(TaiKhoan taiKhoanDangNhap) {
         TaiKhoanDangNhap = taiKhoanDangNhap;
     }
 
