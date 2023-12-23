@@ -292,18 +292,8 @@
                             </font>
                         </Label>
                         <PasswordField fx:id="PassTF" disable="true" layoutX="151.0" layoutY="109.0" prefHeight="25.0" prefWidth="230.0" />
-                        <Label layoutX="464.0" layoutY="15.0" prefHeight="40.0" prefWidth="109.0" text="Đang chọn:">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </Label>
                         <Separator layoutX="721.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
                         <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <Label fx:id="HienIDMay" layoutX="569.0" layoutY="15.0" prefHeight="40.0" prefWidth="122.0" text="NULL">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </Label>
                         <JFXButton fx:id="BiHongBT" disable="true" layoutX="783.0" layoutY="15.0" onAction="#KhiBiHong" prefHeight="39.0" prefWidth="160.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css" text="Bị hỏng">
                             <font>
                                 <Font size="18.0" />
@@ -319,16 +309,31 @@
                                 <Font size="18.0" />
                             </font>
                         </JFXButton>
-                        <JFXButton fx:id="KetNoiBT" disable="true" layoutX="464.0" layoutY="59.0" prefHeight="39.0" prefWidth="166.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css" text="Kết nối">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </JFXButton>
-                        <JFXButton fx:id="LamMoiBT" layoutX="464.0" layoutY="109.0" onAction="#LamMoi" prefHeight="39.0" prefWidth="166.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css" text="Làm mới">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </JFXButton>
+                  <Label layoutX="405.0" layoutY="57.0" prefHeight="40.0" prefWidth="109.0" text="Đang chọn:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="HienIDMay" layoutX="514.0" layoutY="57.0" prefHeight="40.0" prefWidth="90.0" text="NULL">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="KetNoiBT" disable="true" layoutX="602.0" layoutY="14.0" onAction="#KhiKetNoi" prefHeight="39.0" prefWidth="109.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css" text="Kết nối">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="LamMoiBT" layoutX="602.0" layoutY="113.0" onAction="#LamMoi" prefHeight="39.0" prefWidth="109.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css" text="Làm mới">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="TatMayBT" disable="true" layoutX="602.0" layoutY="62.0" onAction="#KhiTatMay" prefHeight="39.0" prefWidth="109.0" styleClass="ButtonThuong" stylesheets="@../CSS/ButtonXin.css" text="Tắt máy">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
                     </children>
                 </AnchorPane>
             </children>

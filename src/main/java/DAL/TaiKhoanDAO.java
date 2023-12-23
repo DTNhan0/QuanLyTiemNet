@@ -110,6 +110,30 @@ public class TaiKhoanDAO {
         }
     }
 
+    public void setTKDangSD(TaiKhoan tk, boolean dangSudung) {
+        String sql = "UPDATE TAIKHOAN SET DANGSUDUNG = ? WHERE USERNAME = ? AND SDT = ?";
+        try (
+                Connection con = new QLTiemNetConnectionDBS().getConnection();
+                PreparedStatement pstm = con.prepareStatement(sql);
+        ) {
+            pstm.setBoolean(1, dangSudung);
+            pstm.setString(2, tk.getUsername());
+            pstm.setString(3, tk.getSdt());
+
+            int rowsAffected = pstm.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Tài khoản đã được cập nhật trong DBS!!!");
+            } else {
+                System.out.println("Không thể cập nhật tài khoản trong DBS. Kiểm tra lại thông tin đầu vào!!!");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public TaiKhoan findByUsernameAndSdt(String username, String password) throws Exception {
         String sql = "SELECT * FROM TAIKHOAN WHERE USERNAME = ? AND PASSWORD = ? AND TONTAI = 1";
         try (

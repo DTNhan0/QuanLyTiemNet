@@ -33,33 +33,22 @@ public class ThongTinSuDungDAO {
         }
     }
     public void addThongTinSuDung(ThongTinSuDung thongTinSuDung) throws Exception {
-        String sql = "INSERT INTO THONGTINSUDUNG (TAIKHOAN, SDT, MAY) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO THONGTINSUDUNG (TAIKHOAN, SDT, MAY, TGBATDAU, TGKETTHUC, DANGSUDUNG) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (
-                Connection con = new QLTiemNetConnectionDBS().getConnection();
+                Connection con = QLTiemNetConnectionDBS.getConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);
         ) {
-            pstm.setString(2, thongTinSuDung.getUsername());
-            pstm.setString(3, thongTinSuDung.getSdt());
-            pstm.setString(1, thongTinSuDung.getMaMay());
-
-            int rowsAffected = pstm.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Dữ liệu đã được thêm vào bảng THONGTINSUDUNG.");
-            } else {
-                System.out.println("Không có dữ liệu nào được thêm vào bảng THONGTINSUDUNG.");
-            }
-        }
-    }
-    public void KhiTatMay(ThongTinSuDung thongTinSuDung){
-        String sql = "UPDATE SET DANGSUDUNG = 0 WHERE MAY = ? AND SDT = ?";
-
-        try (
-                Connection con = new QLTiemNetConnectionDBS().getConnection();
-                PreparedStatement pstm = con.prepareStatement(sql);
-        ) {
+            pstm.setString(1, thongTinSuDung.getUsername());
             pstm.setString(2, thongTinSuDung.getSdt());
-            pstm.setString(1, thongTinSuDung.getMaMay());
+            pstm.setString(3, thongTinSuDung.getMaMay());
+
+            Timestamp tgBatDauTimestamp = Timestamp.valueOf(thongTinSuDung.getTgBatDau());
+            Timestamp tgKetThucTimestamp = Timestamp.valueOf(thongTinSuDung.getTgKetThuc());
+
+            pstm.setTimestamp(4, tgBatDauTimestamp);
+            pstm.setTimestamp(5, tgKetThucTimestamp);
+            pstm.setBoolean(6, true);
 
             int rowsAffected = pstm.executeUpdate();
             if (rowsAffected > 0) {
@@ -67,10 +56,6 @@ public class ThongTinSuDungDAO {
             } else {
                 System.out.println("Không có dữ liệu nào được thêm vào bảng THONGTINSUDUNG.");
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
 }

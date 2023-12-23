@@ -20,8 +20,7 @@ public class MayTinh {
         this.ngayMua = ngayMua;
     }
 
-    public MayTinh() {
-    }
+    public MayTinh() {super();}
 
     public String getMaMay() {
         return maMay;

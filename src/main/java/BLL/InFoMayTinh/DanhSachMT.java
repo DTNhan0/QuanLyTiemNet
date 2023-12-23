@@ -67,20 +67,29 @@ public class DanhSachMT {
 
     public int MayDangONL(){
         int count = 0;
-        for(MayTinh mt : DSMayTinh){
-            if(mt.isCoSan() == false && mt.isTrangThai() == true){
-                count++;
+        try {
+            for(MayTinh mt : new MayTinhDAO().getAll()){
+                if(mt.isCoSan() == false && mt.isTrangThai() == true){
+                    count++;
+                }
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return count;
     }
     public int MayCoSan(){
         int count = 0;
-        for(MayTinh mt : DSMayTinh){
-            if(mt.isCoSan() == true && mt.isTrangThai() == true){
-                count++;
+        try {
+            for(MayTinh mt : new MayTinhDAO().getAll()){
+                if(mt.isCoSan() == true && mt.isTrangThai() == true){
+                    count++;
+                }
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+        System.out.println(count);
         return count;
     }
 

@@ -6,7 +6,7 @@ module mainscript.quanlytiemnet {
     requires java.sql;
     requires java.naming;
     requires javafx.base;
-    requires jdk.internal.le;
+//    requires jdk.internal.le;
 
 
     opens mainscript.quanlytiemnet to javafx.fxml;

@@ -3,41 +3,42 @@ package mainscript.quanlytiemnet;
 import BLL.InFoMayTinh.DanhSachMT;
 import BLL.InFoTaiKhoan.DanhSachTK;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class MainController implements Initializable {
     public BorderPane MainSwitching;
 
     @FXML
-    public static AnchorPane StatusPane;
-    @FXML
-    public static Label SoMayCoSan;
+    private AnchorPane StatusPane;
 
     @FXML
-    public static Label SoMayHong;
+    private Label SoMayCoSan;
 
     @FXML
-    public static Label SoMayOnl;
+    private Label SoMayHong;
+
+    @FXML
+    private Label SoMayOnl;
 
     @FXML
     private Label TenAdmin;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         TenAdmin.setText(new DanhSachTK().getTaiKhoanDangNhap().getUsername());
-    }
-
-    public static void CapNhatStatus(){
-        SoMayCoSan.setText(String.valueOf(new DanhSachMT().MayCoSan()));
-        //Se viet them cac trang thai khac
     }
     @FXML
     public void ChonDSKH(ActionEvent event) {

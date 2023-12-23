@@ -35,10 +35,23 @@ public class DanhSachTK {
         new TaiKhoanDAO().ThemTaiKhoanDBS(tk);
     }
 
+    public TaiKhoan TimTKTraVeTK(String Username, String Sdt) throws Exception {
+        for (TaiKhoan tk : new TaiKhoanDAO().getAll()) {
+            String tkUsername = tk.getUsername();
+            String tkSdt = tk.getSdt();
+            if (tkUsername != null && tkSdt != null && tkUsername.equals(Username) && tkSdt.equals(Sdt)) {
+                return tk;
+            }
+        }
+        System.out.println("Không tìm thấy tài khoản!!!");
+        return null;
+    }
+
     public int TimTaiKhoan(String Username, String Sdt){
         for(int i = 0; i < DSTaiKhoan.size(); i++){
             TaiKhoan tk = DSTaiKhoan.get(i);
             if(tk.getUsername().equals(Username) && tk.getSdt().equals(Sdt)){
+                System.out.println(i);
                 return i;
             }
         }
@@ -54,6 +67,15 @@ public class DanhSachTK {
         if (index_capNhat != -1) {
             DSTaiKhoan.set(index_capNhat, tk);
             new TaiKhoanDAO().CapNhatTKDBS(tk);
+        } else {
+            System.out.println("Cập nhật không thành công!!!");
+        }
+    }
+    public void CapNhatTKdagSD(TaiKhoan tk){
+        int index_capNhat = TimTaiKhoan(tk.getUsername(), tk.getSdt());
+        if (index_capNhat != -1) {
+            DSTaiKhoan.set(index_capNhat, tk);
+            new TaiKhoanDAO().setTKDangSD(tk, false);
         } else {
             System.out.println("Cập nhật không thành công!!!");
         }
