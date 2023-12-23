@@ -36,10 +36,10 @@ public class DanhSachTK {
     }
 
     public TaiKhoan TimTKTraVeTK(String Username, String Sdt) throws Exception {
-        for (TaiKhoan tk : new TaiKhoanDAO().getAll()) {
+        for (TaiKhoan tk : DSTaiKhoan) {
             String tkUsername = tk.getUsername();
             String tkSdt = tk.getSdt();
-            if (tkUsername != null && tkSdt != null && tkUsername.equals(Username) && tkSdt.equals(Sdt)) {
+            if (tkUsername.equals(Username) && tkSdt.equals(Sdt)) {
                 return tk;
             }
         }
@@ -51,17 +51,18 @@ public class DanhSachTK {
         for(int i = 0; i < DSTaiKhoan.size(); i++){
             TaiKhoan tk = DSTaiKhoan.get(i);
             if(tk.getUsername().equals(Username) && tk.getSdt().equals(Sdt)){
-                System.out.println(i);
                 return i;
             }
         }
         return -1;
     }
+
     public void XoaTaiKhoan(TaiKhoan tk){
         int index_Xoa = TimTaiKhoan(tk.getUsername(), tk.getSdt());
         DSTaiKhoan.remove(index_Xoa);
         new TaiKhoanDAO().XoaTaiKhoanDBS(tk);
     }
+
     public void CapNhatTaiKhoan(TaiKhoan tk){
         int index_capNhat = TimTaiKhoan(tk.getUsername(), tk.getSdt());
         if (index_capNhat != -1) {
@@ -71,15 +72,7 @@ public class DanhSachTK {
             System.out.println("Cập nhật không thành công!!!");
         }
     }
-    public void CapNhatTKdagSD(TaiKhoan tk){
-        int index_capNhat = TimTaiKhoan(tk.getUsername(), tk.getSdt());
-        if (index_capNhat != -1) {
-            DSTaiKhoan.set(index_capNhat, tk);
-            new TaiKhoanDAO().setTKDangSD(tk, false);
-        } else {
-            System.out.println("Cập nhật không thành công!!!");
-        }
-    }
+
     public void NapTien(TaiKhoan tk, double TienMoi){
         int index_TK = TimTaiKhoan(tk.getUsername(), tk.getSdt());
         if (index_TK != -1) {

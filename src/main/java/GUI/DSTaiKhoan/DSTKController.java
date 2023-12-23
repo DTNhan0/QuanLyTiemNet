@@ -93,6 +93,7 @@ public class DSTKController implements Initializable {
                 BangDSKH.getItems().addAll(DSTK);
                 BangDSKH.refresh();
         }
+
         @FXML
         public void ResetThongTinNhap() {
                 HangTVTF.clear();
@@ -125,10 +126,10 @@ public class DSTKController implements Initializable {
 
                 BangDSKH.getSelectionModel().clearSelection();
         }
+
         @FXML
         public void capNhatTaiKhoan() {
-                int selectedIndex = BangDSKH.getSelectionModel().getSelectedIndex();
-                if (selectedIndex != -1) {
+                if (!(BangDSKH.getSelectionModel().isEmpty())) {
                         // Hiển thị hộp thoại xác nhận trước khi cập nhật
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Xác nhận cập nhật");
@@ -153,6 +154,7 @@ public class DSTKController implements Initializable {
                     showAlert("Lỗi!!!", "Vui lòng chọn một tài khoản để cập nhật.", Alert.AlertType.ERROR);
                 }
         }
+
         @FXML
         public void themTaiKhoan() {
                 boolean checkAdmin = NutAdmin.isSelected();
@@ -161,35 +163,52 @@ public class DSTKController implements Initializable {
                         showAlert("Lỗi", "Vui lòng điền đầy đủ thông tin (username, password, sđt và Role)", Alert.AlertType.ERROR);
                 } else {
                         TaiKhoan tk = new TaiKhoan(TaiKhoanTF.getText(), PassTF.getText(), SdtTF.getText(), HangTVTF.getText(), checkAdmin);
-                        new DanhSachTK().ThemTaiKhoan(tk);
-                        CapNhatLaiTableView();
-                        showAlert("Thông báo", "Tài khoản đã được thêm thành công!", Alert.AlertType.INFORMATION);
+                        if(CheckTKdaTonTai(tk)){
+                                showAlert("Lỗi", "Lỗi, có tài khoản đã tồn tại sđt này!!!", Alert.AlertType.ERROR);
+                                return;
+                        }
+                        if(tk.getSdt().length() != 10){
+                                showAlert("Lỗi", "Lỗi, sđt tài khoản phải có 10 chữ số!!!", Alert.AlertType.ERROR);
+                                return;
+                        }
+                          new DanhSachTK().ThemTaiKhoan(tk);
+                          CapNhatLaiTableView();
+                          showAlert("Thông báo", "Tài khoản đã được thêm thành công!", Alert.AlertType.INFORMATION);
+
                 }
+        }
+
+        public boolean CheckTKdaTonTai(TaiKhoan tk){
+                for(TaiKhoan taiKhoan : DSTK){
+                        if(tk.getSdt().equals(taiKhoan.getSdt())){
+                                return true;
+                        }
+                }
+                return false;
         }
         @FXML
         public void xoaTaiKhoan() {
-        int selectedIndex = BangDSKH.getSelectionModel().getSelectedIndex();
-        if (selectedIndex != -1) {
+                if (!(BangDSKH.getSelectionModel().isEmpty())) {
+                    // Hiển thị hộp thoại xác nhận trước khi xóa
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Xác nhận xóa");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Bạn có chắc chắn muốn xóa tài khoản có SĐT: " + SdtTF.getText());
 
-            // Hiển thị hộp thoại xác nhận trước khi xóa
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Xác nhận xóa");
-            alert.setHeaderText(null);
-            alert.setContentText("Bạn có chắc chắn muốn xóa tài khoản có SĐT: " + SdtTF.getText());
-
-            // Sử dụng Optional để xác nhận người dùng chọn OK hoặc Cancel
-            alert.showAndWait().ifPresent(response -> {
-                if (response == ButtonType.OK) {
-                        TaiKhoan tk = BangDSKH.getSelectionModel().getSelectedItem();
-                        new DanhSachTK().XoaTaiKhoan(tk);
-                        CapNhatLaiTableView();
-                        ResetThongTinNhap();
+                    // Sử dụng Optional để xác nhận người dùng chọn OK hoặc Cancel
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                                TaiKhoan tk = BangDSKH.getSelectionModel().getSelectedItem();
+                                new DanhSachTK().XoaTaiKhoan(tk);
+                                CapNhatLaiTableView();
+                                ResetThongTinNhap();
+                        }
+                    });
+                } else {
+                    showAlert("Lỗi!!!", "Vui lòng chọn một tài khoản để xóa.", Alert.AlertType.ERROR);
                 }
-            });
-        } else {
-            showAlert("Lỗi!!!", "Vui lòng chọn một tài khoản để xóa.", Alert.AlertType.ERROR);
         }
-        }
+
         private void hienThiThongTinTaiKhoan(TaiKhoan tk) {
                 TaiKhoan dangnhap = new DanhSachTK().getTaiKhoanDangNhap();
                 HangTVTF.setText(tk.getHangthanhvien());
@@ -239,17 +258,29 @@ public class DSTKController implements Initializable {
                         NapTienBT.setDisable(false);
                 }
         }
-        public void NapTien(){
-                if(BangDSKH.getSelectionModel().isEmpty()){
+
+        public void NapTien() {
+                if (BangDSKH.getSelectionModel().isEmpty()) {
                         showAlert("Lỗi!!!", "Vui lòng chọn một tài khoản để nạp!!!", Alert.AlertType.ERROR);
-                }else{
+                        return;
+                }
+
+                try {
+                        String soTienNap = SoTienNapTF.getText();
+                        if (soTienNap.isEmpty()) {
+                                throw new NullPointerException();
+                        }
+
                         TaiKhoan tk = BangDSKH.getSelectionModel().getSelectedItem();
-                        showAlert("Nạp tiền thành công!!!", "Bạn đã nạp " + SoTienNapTF.getText() + " thành công vào tk có sđt:" + tk.getSdt(), Alert.AlertType.CONFIRMATION);
-                        new DanhSachTK().NapTien(tk, Double.parseDouble(SoTienNapTF.getText()));
+                        showAlert("Nạp tiền thành công!!!", "Bạn đã nạp " + soTienNap + " thành công vào tk có sđt:" + tk.getSdt(), Alert.AlertType.CONFIRMATION);
+                        new DanhSachTK().NapTien(tk, Double.parseDouble(soTienNap));
                         CapNhatLaiTableView();
                         BangDSKH.refresh();
+                } catch (NullPointerException exception) {
+                        showAlert("Lỗi!!!", "Không được để trống số tiền nạp!!!", Alert.AlertType.ERROR);
                 }
         }
+
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
                 BangDSKH.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -269,6 +300,7 @@ public class DSTKController implements Initializable {
                 VaiTroCol.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isRole()).asObject());
                 BangDSKH.getItems().addAll(DSTK);
         }
+
         private void showAlert(String title, String content, Alert.AlertType alertType) {
                 Alert alert = new Alert(alertType);
                 alert.setTitle(title);

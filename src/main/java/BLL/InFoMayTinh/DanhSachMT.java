@@ -17,9 +17,11 @@ public class DanhSachMT {
     public List<MayTinh> getDSMayTinh() {
         return DSMayTinh;
     }
+
     public void setDSMayTinh(List<MayTinh> DSMayTinh) {
         this.DSMayTinh = DSMayTinh;
     }
+
     public List<MayTinh> LayDSMayTheoPhong(String phong) throws Exception {
         List<MayTinh> ds = new DanhSachMT().getDSMayTinh();
         List<MayTinh> DSMayTheoPhong = new ArrayList<>();
@@ -29,6 +31,16 @@ public class DanhSachMT {
             }
         }
         return DSMayTheoPhong;
+    }
+
+    public MayTinh TimMayTraVeMT(String maMay){
+        for(MayTinh mt : DSMayTinh){
+            if(mt.getMaMay().equals(maMay)){
+                return mt;
+            }
+        }
+        System.out.println("Không tìm thấy mã máy!!!");
+        return null;
     }
     public int TimMay(String maMay, String phong) {
         for (int i = 0; i < DSMayTinh.size(); i++) {
@@ -42,14 +54,14 @@ public class DanhSachMT {
 
     public void ThemMay(MayTinh may) throws Exception {
         DSMayTinh.add(may);
-        MayTinhDAO.insertMayTinh(may);
+        MayTinhDAO.ThemMayTinh(may);
     }
 
     public void XoaMay(MayTinh mayTinh) throws Exception {
         int index_MayXoa = TimMay(mayTinh.getMaMay(), mayTinh.getPhong());
         if (index_MayXoa != -1 && DSMayTinh.get(index_MayXoa).getPhong().equals(mayTinh.getPhong())) {
             DSMayTinh.remove(index_MayXoa);
-            MayTinhDAO.deleteMayTinh(mayTinh);
+            MayTinhDAO.XoaMayTinh(mayTinh);
         } else {
             System.out.println("Lỗi không tìm thấy máy có mã: " + mayTinh.getMaMay() + "và thuộc phòng: " + mayTinh.getPhong());
         }
@@ -78,6 +90,7 @@ public class DanhSachMT {
         }
         return count;
     }
+
     public int MayCoSan(){
         int count = 0;
         try {

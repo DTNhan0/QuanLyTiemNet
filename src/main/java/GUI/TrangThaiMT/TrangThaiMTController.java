@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 public class TrangThaiMTController implements Initializable {
     @FXML
     private JFXComboBox<String> LoaiPhong;
+
     @FXML
     private BorderPane ChuyenPhong;
 

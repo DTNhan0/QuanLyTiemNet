@@ -6,6 +6,7 @@ import DAL.TaiKhoanDAO;
 import DAL.ThongTinSuDungDAO;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DSThongTinSD {
@@ -25,14 +26,22 @@ public class DSThongTinSD {
             throw new RuntimeException(e);
         }
     }
-    public ThongTinSuDung TimTKtrongThongTinSD(String maMay){
+    public ThongTinSuDung TimTKdagSDtrongThongTinSD(String maMay){
         for(ThongTinSuDung ttsd : DSThongTinSD){
-            if(ttsd.getMaMay().equals(maMay)){
+            if(ttsd.getMaMay().equals(maMay) && ttsd.getDagSD()){
                 return ttsd;
             }
         }
-        System.out.println("Khong tim dc ttsd theo ma may!!!");
+        System.out.println("Không tìm được tài khoản trong thông tin sử dụng theo mã máy!!!");
         return null;
     }
-
+    public List <ThongTinSuDung> LayCacMayDagSDTrongTTSD(){
+        List <ThongTinSuDung> res = new ArrayList<>();
+        for(ThongTinSuDung ttsd : DSThongTinSD){
+            if(ttsd.getDagSD()){
+                res.add(ttsd);
+            }
+        }
+        return res;
+    }
 }

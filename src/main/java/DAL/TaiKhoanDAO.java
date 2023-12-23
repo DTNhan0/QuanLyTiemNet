@@ -54,7 +54,7 @@ public class TaiKhoanDAO {
             if (rowsAffected > 0) {
                 System.out.println("Tài khoản đã được thêm vào DBS!!!");
             } else {
-                System.out.println("Không thể thêm tài khoản vào DBS!!!");
+                System.out.println("Lỗi không thể thêm tài khoản vào DBS!!!");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -86,7 +86,7 @@ public class TaiKhoanDAO {
     }
 
     public void CapNhatTKDBS(TaiKhoan tk) {
-        String sql = "UPDATE TAIKHOAN SET PASSWORD = ?, ROLE = ?, HANGTHANHVIEN = ? WHERE USERNAME = ? AND SDT = ?";
+        String sql = "UPDATE TAIKHOAN SET PASSWORD = ?, ROLE = ?, HANGTHANHVIEN = ?, DANGSUDUNG = ? WHERE USERNAME = ? AND SDT = ?";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);
@@ -94,8 +94,9 @@ public class TaiKhoanDAO {
             pstm.setString(1, tk.getPassword());
             pstm.setBoolean(2, tk.isRole());
             pstm.setString(3, tk.getHangthanhvien());
-            pstm.setString(4, tk.getUsername());
-            pstm.setString(5, tk.getSdt());
+            pstm.setBoolean(4, tk.isDangSD());
+            pstm.setString(5, tk.getUsername());
+            pstm.setString(6, tk.getSdt());
 
             int rowsAffected = pstm.executeUpdate();
             if (rowsAffected > 0) {
@@ -110,31 +111,7 @@ public class TaiKhoanDAO {
         }
     }
 
-    public void setTKDangSD(TaiKhoan tk, boolean dangSudung) {
-        String sql = "UPDATE TAIKHOAN SET DANGSUDUNG = ? WHERE USERNAME = ? AND SDT = ?";
-        try (
-                Connection con = new QLTiemNetConnectionDBS().getConnection();
-                PreparedStatement pstm = con.prepareStatement(sql);
-        ) {
-            pstm.setBoolean(1, dangSudung);
-            pstm.setString(2, tk.getUsername());
-            pstm.setString(3, tk.getSdt());
-
-            int rowsAffected = pstm.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Tài khoản đã được cập nhật trong DBS!!!");
-            } else {
-                System.out.println("Không thể cập nhật tài khoản trong DBS. Kiểm tra lại thông tin đầu vào!!!");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    public TaiKhoan findByUsernameAndSdt(String username, String password) throws Exception {
+    public TaiKhoan KtraTenvaPassTK(String username, String password) throws Exception {
         String sql = "SELECT * FROM TAIKHOAN WHERE USERNAME = ? AND PASSWORD = ? AND TONTAI = 1";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
@@ -157,7 +134,7 @@ public class TaiKhoanDAO {
                 tk.setDangSD(rs.getBoolean("DANGSUDUNG"));
                 return tk;
             } else {
-                System.out.println("Không có tài khoản nào được tìm thấy với username và password cung cấp.");
+                System.out.println("Lỗi không có tài khoản nào được tìm thấy với username và password cung cấp!!!");
                 return null;
             }
         }
@@ -166,7 +143,7 @@ public class TaiKhoanDAO {
         }
     }
 
-    public boolean insert(TaiKhoan tk) throws Exception {
+    public boolean DangKyTK(TaiKhoan tk) throws Exception {
         String sql = "INSERT INTO TAIKHOAN (USERNAME, SDT, PASSWORD, ROLE, HANGTHANHVIEN, SOPHUTDADUNG, SOTIENTICHLUY, SOTIENCONLAI, DANGSUDUNG) VALUES (?, ?, ?, ?, null, 0, 0, 0, 0)";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
@@ -181,7 +158,7 @@ public class TaiKhoanDAO {
         }
     }
 
-    public boolean updatePassword(TaiKhoan tk) throws Exception {
+    public boolean LaylaiMatKhau(TaiKhoan tk) throws Exception {
         String sql = "UPDATE TAIKHOAN SET PASSWORD = ? WHERE USERNAME = ? AND SDT = ?";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
@@ -209,9 +186,9 @@ public class TaiKhoanDAO {
 
             int rowsAffected = pstm.executeUpdate();
             if (rowsAffected > 0) {
-                System.out.println("Tài khoản đã được cập nhật trong DBS!!!");
+                System.out.println("Đã nạp tiền thành công vào DBS!!!");
             } else {
-                System.out.println("Không thể cập nhật tài khoản trong DBS. Kiểm tra lại thông tin đầu vào!!!");
+                System.out.println("Lỗi không thể nạp tiền vào DBS!!!");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

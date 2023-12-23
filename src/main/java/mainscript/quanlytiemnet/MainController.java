@@ -2,6 +2,8 @@ package mainscript.quanlytiemnet;
 
 import BLL.InFoMayTinh.DanhSachMT;
 import BLL.InFoTaiKhoan.DanhSachTK;
+import BLL.MainControllerStatusManagement;
+import GUI.TrangThaiMT.Phong_thuong_1_Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -39,6 +41,14 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         TenAdmin.setText(new DanhSachTK().getTaiKhoanDangNhap().getUsername());
+        SoMayOnl.setText(String.valueOf(new DanhSachMT().MayDangONL()));
+        SoMayCoSan.setText(String.valueOf(new DanhSachMT().MayCoSan()));
+        MainControllerStatusManagement.setMainController(this);
+    }
+
+    public void CapNhatMainStatus(){
+        SoMayOnl.setText(String.valueOf(new DanhSachMT().MayDangONL()));
+        SoMayCoSan.setText(String.valueOf(new DanhSachMT().MayCoSan()));
     }
     @FXML
     public void ChonDSKH(ActionEvent event) {
@@ -53,9 +63,8 @@ public class MainController implements Initializable {
         Pane view = object.getPage("/ThongKe/MainTK.fxml");
         MainSwitching.setCenter(view);
     }
-
     @FXML
-    public void ChonTrangThaiMT(ActionEvent event) {
+    public void ChonTrangThaiMT() {
         ChuyenCanhFXML object = new ChuyenCanhFXML();
         Pane view = object.getPage("/TrangThaiMayTinh/MainTrangThaiMT.fxml");
         MainSwitching.setCenter(view);

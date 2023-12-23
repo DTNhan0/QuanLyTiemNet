@@ -2,6 +2,8 @@ package GUI.DanhSachMT;
 
 import BLL.InFoMayTinh.DanhSachMT;
 import BLL.InFoMayTinh.MayTinh;
+import BLL.InFoTaiKhoan.DanhSachTK;
+import BLL.InFoTaiKhoan.TaiKhoan;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.beans.property.*;
@@ -65,6 +67,7 @@ public class DSMayTinhController implements Initializable {
 
     @FXML
     private JFXButton XoaBT;
+
     public void CapNhatLaiTableView(){
         DSMayTinh = new DanhSachMT().getDSMayTinh();
         // Cập nhật lại TableView
@@ -72,6 +75,7 @@ public class DSMayTinhController implements Initializable {
         BangDSMT.getItems().addAll(DSMayTinh);
         BangDSMT.refresh();
     }
+
     private DatePicker convertToDatePicker(Date date) {
         if (date != null) {
             LocalDate localDate = date.toLocalDate();
@@ -126,6 +130,7 @@ public class DSMayTinhController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
     public void ThemMay() {
         String Mamay = MMayTF.getText();
         String BaoHanhText = BaoHanhTF.getText();
@@ -133,25 +138,16 @@ public class DSMayTinhController implements Initializable {
         String Phong = PhongCB.getValue();
 
         if (Mamay == null || BaoHanhText.isEmpty() || ngayMuaValue == null || Phong == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Lỗi");
-            alert.setHeaderText(null);
-            alert.setContentText("Không được để trống!");
-            alert.showAndWait();
+            showAlert("Lỗi!!!", "Không được để trống thông tin!!!", Alert.AlertType.ERROR);
             return;
         }
-
         try {
             int BaoHanh = Integer.parseInt(BaoHanhText);
             Date NgayMua = Date.valueOf(ngayMuaValue);
 
-            // Kiểm tra xem mã máy đã tồn tại trong phòng hay chưa
-            if (CheckMayTonTai(Mamay, Phong)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Lỗi");
-                alert.setHeaderText(null);
-                alert.setContentText("Mã máy đã tồn tại trong phòng!");
-                alert.showAndWait();
+            // Kiểm tra xem mã máy đã tồn tại hay chưa
+            if (CheckMaMayTonTai(Mamay) || CheckMayTrongPhongHopLe(Mamay ,Phong) || Mamay.length() != 6) {
+                showAlert("Lỗi!!!", "Lỗi, mã máy đã tồn tại hoặc mã máy phải đúng theo phòng!!!", Alert.AlertType.ERROR);
                 return;
             }
 
@@ -159,6 +155,7 @@ public class DSMayTinhController implements Initializable {
 
             // Thêm máy vào DBS
             try {
+                showAlert("Thông báo", "Đã thêm máy có mã: " + mt.getMaMay(), Alert.AlertType.CONFIRMATION);
                 new DanhSachMT().ThemMay(mt);
                 CapNhatLaiTableView();
             } catch (Exception e) {
@@ -172,40 +169,69 @@ public class DSMayTinhController implements Initializable {
             alert.showAndWait();
         }
     }
-    private boolean CheckMayTonTai(String maMay, String phong) {
+
+    public boolean CheckMaMayTonTai(String maMay) {
         for (MayTinh may : DSMayTinh) {
             if (may.getMaMay().equals(maMay)) {
-                return true; // Mã máy đã tồn tại trong phòng
+                return true;
             }
         }
-        return false; // Mã máy chưa tồn tại trong phòng
+        return false;
     }
+
+    public boolean CheckMayTrongPhongHopLe(String maMay, String phong){
+        switch (phong) {
+            case "T01":
+                return kiemTraPhamVi("MAY001", "MAY018", maMay);
+            case "T02":
+                return kiemTraPhamVi("MAY019", "MAY036", maMay);
+            case "VIP01":
+                return kiemTraPhamVi("MAY037", "MAY054", maMay);
+            default:
+                // Nếu phòng không nằm trong các trường hợp trên, coi như là không hợp lệ
+                return false;
+        }
+    }
+
+    private boolean kiemTraPhamVi(String start, String end, String maMay) {
+        int startNum = Integer.parseInt(start.substring(3));
+        int endNum = Integer.parseInt(end.substring(3));
+        int maMayNum = Integer.parseInt(maMay.substring(3));
+
+        return !(maMayNum >= startNum && maMayNum <= endNum);
+    }
+
     public void XoaMay() {
         if (BangDSMT.getSelectionModel().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Lỗi");
-            alert.setHeaderText(null);
-            alert.setContentText("Hãy chọn máy cần xóa!!!");
-            alert.showAndWait();
+            showAlert("Lỗi!!!", "Hãy chọn máy cần xóa!!!", Alert.AlertType.ERROR);
         } else {
             MayTinh mt = BangDSMT.getSelectionModel().getSelectedItem();
-            try {
-                // Xóa máy trên Database
-                new DanhSachMT().XoaMay(mt);
-                CapNhatLaiTableView();
-            } catch (Exception e) {
-                System.out.println("Xóa máy trên Database thất bại!!!");
-            }
-            BangDSMT.refresh();
+            // Hiển thị hộp thoại xác nhận trước khi xóa
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Xác nhận xóa");
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn có chắc chắn muốn xóa máy có mã: " + mt.getMaMay());
+
+            // Sử dụng Optional để xác nhận người dùng chọn OK hoặc Cancel
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    try {
+                        // Xóa máy trên Database
+                        new DanhSachMT().XoaMay(mt);
+                        CapNhatLaiTableView();
+                    } catch (Exception e) {
+                        System.out.println("Xóa máy trên Database thất bại!!!");
+                    }
+                    BangDSMT.refresh();
+                }
+            });
+
         }
     }
+
     public void CapNhatMay() {
         if (BangDSMT.getSelectionModel().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Lỗi");
-            alert.setHeaderText(null);
-            alert.setContentText("Hãy chọn máy cần cập nhật!!!");
-            alert.showAndWait();
+            showAlert("Lỗi!!!", "Hãy chọn máy cần cập nhật!!!", Alert.AlertType.ERROR);
         } else {
             MayTinh mayTinh = BangDSMT.getSelectionModel().getSelectedItem();
 
@@ -217,11 +243,7 @@ public class DSMayTinhController implements Initializable {
             LocalDate ngayMuaValue = NgayMuaTF.getValue();
 
             if (BaoHanhText.isEmpty() || ngayMuaValue == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Lỗi");
-                alert.setHeaderText(null);
-                alert.setContentText("Không được để trống!");
-                alert.showAndWait();
+                showAlert("Lỗi!!!", "Không được để trống!!!", Alert.AlertType.ERROR);
                 return;
             }
 
@@ -260,6 +282,7 @@ public class DSMayTinhController implements Initializable {
 
         }
     }
+
     public void LamMoi() {
         MMayTF.setText(null);
         BaoHanhTF.setText(null);
@@ -271,5 +294,13 @@ public class DSMayTinhController implements Initializable {
         PhongCB.setDisable(false);
         BangDSMT.refresh();
         BangDSMT.getSelectionModel().clearSelection();
+    }
+
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

@@ -151,7 +151,7 @@ public class LoginController implements Initializable {
         String password = si_password.getText();
         TaiKhoanDAO dao = new TaiKhoanDAO();
         try {
-            TaiKhoan tk = dao.findByUsernameAndSdt(username, password);
+            TaiKhoan tk = dao.KtraTenvaPassTK(username, password);
             new DanhSachTK().setTaiKhoanDangNhap(tk);
             if (tk != null) {
                 // Nếu có kết quả từ cơ sở dữ liệu, thông báo đăng nhập thành công
@@ -201,7 +201,7 @@ public class LoginController implements Initializable {
 
             // Thực hiện việc chèn dữ liệu vào cơ sở dữ liệu
             TaiKhoanDAO dao = new TaiKhoanDAO();
-            boolean isSuccess = dao.insert(tk);
+            boolean isSuccess = dao.DangKyTK(tk);
 
             if (isSuccess) {
                 // Hiển thị hộp thoại thông báo khi đăng ký thành công
@@ -222,7 +222,7 @@ public class LoginController implements Initializable {
             String sdt = fp_sdt.getText();
             TaiKhoanDAO dao = new TaiKhoanDAO();
             // Thực hiện truy vấn để kiểm tra thông tin đăng nhập
-            if (dao.findByUsernameAndSdt(username, sdt) != null) {
+            if (dao.KtraTenvaPassTK(username, sdt) != null) {
                 // Nếu thông tin đăng nhập đúng, chuyển sang AnchorPane np_newPassForm
                 fp_questionForm.setVisible(false);
                 np_newPassForm.setVisible(true);
@@ -242,7 +242,7 @@ public class LoginController implements Initializable {
     private Pair<String, String> getUsernameAndSdt(String username, String sdt) {
         try {
             TaiKhoanDAO dao = new TaiKhoanDAO();
-            TaiKhoan res = dao.findByUsernameAndSdt(username, sdt);
+            TaiKhoan res = dao.KtraTenvaPassTK(username, sdt);
             if (res != null) {
                 return new Pair<>(res.getUsername(), res.getSdt());
             } else {
@@ -296,7 +296,7 @@ public class LoginController implements Initializable {
                     tk.setSdt(retrievedSdt);
                     tk.setPassword(newPassword);
 //                boolean updateSuccess = updatePasswordInDatabase(retrievedUsername, retrievedSdt, newPassword);
-                    if (dao.updatePassword(tk)) {
+                    if (dao.LaylaiMatKhau(tk)) {
                         // Chuyển sang giao diện đăng nhập
                         showSuccessDialog();
                         switchToLoginForm();

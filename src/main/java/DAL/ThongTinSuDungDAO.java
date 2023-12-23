@@ -23,6 +23,8 @@ public class ThongTinSuDungDAO {
                 ttsd.setSdt(rs.getString("SDT"));
                 ttsd.setMaMay(rs.getString("MAY"));
                 ttsd.setDagSD(rs.getBoolean("DANGSUDUNG"));
+                ttsd.setTgBatDau(rs.getTimestamp("TGBATDAU").toLocalDateTime());
+                ttsd.setTgKetThuc(rs.getTimestamp("TGKETTHUC").toLocalDateTime());
                 lstThongTinSD.add(ttsd);
             }
             return lstThongTinSD;

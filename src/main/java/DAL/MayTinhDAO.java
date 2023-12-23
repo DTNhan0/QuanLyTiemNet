@@ -2,10 +2,7 @@ package DAL;
 
 import BLL.InFoMayTinh.MayTinh;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class MayTinhDAO {
         }
     }
 
-    public static MayTinh findByMamay(String maMay) throws Exception {
+    public static MayTinh TimTheoMaMay(String maMay) throws Exception {
         String sql = "SELECT * FROM MAYTINH WHERE MAMAY = ?";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
@@ -52,11 +49,12 @@ public class MayTinhDAO {
                 mt.setPhong(rs.getString("PHONG"));
                 return mt;
             }
+            System.out.println("Không tìm thấy mã máy trong DBS!!!");
             return null;
         }
     }
 
-    public static void insertMayTinh(MayTinh mayTinh) throws Exception {
+    public static void ThemMayTinh(MayTinh mayTinh) throws Exception {
         String sql = "INSERT INTO MAYTINH (MAMAY, BAOHANH, NGAYMUA, THOIGIANDUNG, COSAN, TRANGTHAI, PHONG) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
@@ -66,20 +64,20 @@ public class MayTinhDAO {
             pstm.setInt(2, mayTinh.getBaoHanh());
             pstm.setDate(3, new java.sql.Date(mayTinh.getNgayMua().getTime()));
             pstm.setInt(4, mayTinh.getThoiGianDung());
-            pstm.setBoolean(5, mayTinh.isCoSan());
-            pstm.setBoolean(6, mayTinh.isTrangThai());
+            pstm.setBoolean(5, true);
+            pstm.setBoolean(6, true);
             pstm.setString(7, mayTinh.getPhong());
 
             int rowsAffected = pstm.executeUpdate();
             if (rowsAffected > 0) {
-                System.out.println("MayTinh inserted successfully!");
+                System.out.println("Thêm máy vào DBS thành công!!!");
             } else {
-                System.out.println("Failed to insert MayTinh!");
+                System.out.println("Lỗi không thể thêm máy vào DBS!!!");
             }
         }
     }
 
-    public static void deleteMayTinh(MayTinh mayTinh) throws Exception {
+    public static void XoaMayTinh(MayTinh mayTinh) throws Exception {
         String sql = "DELETE FROM MAYTINH WHERE MAMAY = ? AND PHONG = ?";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
@@ -90,9 +88,9 @@ public class MayTinhDAO {
 
             int rowsAffected = pstm.executeUpdate();
             if (rowsAffected > 0) {
-                System.out.println("MayTinh deleted successfully!");
+                System.out.println("Đã xóa máy trong DBS thành công!!!");
             } else {
-                System.out.println("Failed to delete MayTinh. MayTinh not found with MAMAY: " + mayTinh.getMaMay() + " in PHONG: " + mayTinh.getPhong());
+                System.out.println("Lỗi không thể xóa máy, không tìm thấy máy có mã: " + mayTinh.getMaMay() + " trong phòng: " + mayTinh.getPhong());
             }
         }
     }
@@ -106,18 +104,42 @@ public class MayTinhDAO {
             pstm.setInt(1, mayTinh.getBaoHanh());
             pstm.setDate(2, new java.sql.Date(mayTinh.getNgayMua().getTime()));
             pstm.setInt(3, mayTinh.getThoiGianDung());
-            pstm.setBoolean(4, true);
-            pstm.setBoolean(5, false);
+            pstm.setBoolean(4, mayTinh.isCoSan());
+            pstm.setBoolean(5, mayTinh.isTrangThai());
             pstm.setString(6, mayTinh.getMaMay());
             pstm.setString(7, mayTinh.getPhong());
 
             int rowsAffected = pstm.executeUpdate();
             if (rowsAffected > 0) {
-                System.out.println("MayTinh updated successfully!");
+                System.out.println("Đã cập nhật máy trong DBS thành công!!!");
             } else {
-                System.out.println("Failed to update MayTinh. MayTinh not found with MAMAY: " + mayTinh.getMaMay() + " in PHONG: " + mayTinh.getPhong());
+                System.out.println("Lỗi không thể cập nhật máy, không tìm thấy máy có mã: " + mayTinh.getMaMay() + " trong phòng: " + mayTinh.getPhong());
             }
         }
     }
+
+    public static boolean getTrangThaiMay(String IDMay) throws SQLException {
+        String sql = "SELECT TRANGTHAI FROM MAYTINH WHERE MAMAY = ?";
+        try (
+                Connection con = QLTiemNetConnectionDBS.getConnection();
+                PreparedStatement pstm = con.prepareStatement(sql);
+        ) {
+            pstm.setString(1, IDMay);
+
+            try (ResultSet resultSet = pstm.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getBoolean("TRANGTHAI");
+                }
+            }
+        } catch (SQLException ex) {
+            System.err.println("Lỗi khi lấy trạng thái từ CSDL:");
+            ex.printStackTrace();
+            throw ex;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return false; // Trả về giá trị mặc định nếu không có kết quả hoặc xảy ra lỗi
+    }
+
 
 }

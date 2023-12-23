@@ -16,7 +16,7 @@ public class ChuyenCanhFXML {
             }
             view = new FXMLLoader().load(fileURL);
         } catch (Exception e) {
-            System.out.println("No page " + filename + " pls check FxmlLoader.");
+            e.printStackTrace();
         }
         return view;
     }
