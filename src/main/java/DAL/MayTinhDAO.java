@@ -141,5 +141,4 @@ public class MayTinhDAO {
         return false; // Trả về giá trị mặc định nếu không có kết quả hoặc xảy ra lỗi
     }
 
-
 }

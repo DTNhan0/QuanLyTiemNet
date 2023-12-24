@@ -205,8 +205,6 @@ public class Phong_VIP_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ResetTrangThai();
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
     }
 
     public void HienThiThongTinNhap(ActionEvent event) {
@@ -334,6 +332,7 @@ public class Phong_VIP_Controller implements Initializable {
     public void KhiTatMay(){
         ThongTinSuDung ttsd = new DSThongTinSD().TimTKdagSDtrongThongTinSD(selectedIDMayFormat.toUpperCase());
         try {
+            MainController.checkingTimeline = false;
             TaiKhoan tk = new DanhSachTK().TimTKTraVeTK(ttsd.getUsername(), ttsd.getSdt());
             showAlert("Thông báo", "Đã ngắt kết nối tk có SĐT: " + SdtTF.getText() + " với " + HienIDMay.getText(), Alert.AlertType.CONFIRMATION);
             tk.setDangSD(false);
@@ -413,25 +412,4 @@ public class Phong_VIP_Controller implements Initializable {
         alert.setContentText(content);
         alert.showAndWait();
     }
-
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-
-    Timeline timeline = new Timeline(
-            new KeyFrame(Duration.seconds(1), e -> {
-                LocalDateTime now = LocalDateTime.now();
-
-                for(ThongTinSuDung ttsd : new DSThongTinSD().LayCacMayDagSDTrongTTSD()){
-                    if(ttsd.getTgKetThuc().format(formatter).equals(now.format(formatter))){
-                        try {
-                            TaiKhoan tk = new DanhSachTK().TimTKTraVeTK(ttsd.getUsername(), ttsd.getSdt());
-                            tk.setDangSD(false);
-                            new DanhSachTK().CapNhatTaiKhoan(tk);
-                        } catch (Exception ex) {
-                            throw new RuntimeException(ex);
-                        }
-
-                    }
-                }
-            })
-    );
 }

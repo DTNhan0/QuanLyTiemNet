@@ -86,15 +86,6 @@ public class DSTKController implements Initializable {
         @FXML
         private JFXButton NapTienBT;
 
-        public void XuLyTKAmTien(){
-                for(TaiKhoan tk : new DanhSachTK().getDSTaiKhoan()){
-                        if(tk.getSoTienConLai() < 0){
-                                tk.setSoTienConLai(0);
-                                new DanhSachTK().CapNhatTaiKhoan(tk);
-                        }
-                }
-        }
-
         public void CapNhatLaiTableView(){
                 DSTK = new DanhSachTK().getDSTaiKhoan();
                 // Cập nhật lại TableView
@@ -176,8 +167,8 @@ public class DSTKController implements Initializable {
                                 showAlert("Lỗi", "Lỗi, có tài khoản đã tồn tại sđt này!!!", Alert.AlertType.ERROR);
                                 return;
                         }
-                        if(tk.getSdt().length() != 10){
-                                showAlert("Lỗi", "Lỗi, sđt tài khoản phải có 10 chữ số!!!", Alert.AlertType.ERROR);
+                        if(tk.getSdt().length() != 10 || !(tk.getSdt().matches("\\d+"))){
+                                showAlert("Lỗi", "Lỗi, sđt tài khoản phải có 10 CHỮ SỐ!!!", Alert.AlertType.ERROR);
                                 return;
                         }
                           new DanhSachTK().ThemTaiKhoan(tk);
@@ -292,7 +283,6 @@ public class DSTKController implements Initializable {
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
-                XuLyTKAmTien();
                 BangDSKH.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 if (newSelection != null) {
                         // Hiển thị thông tin tài khoản được chọn lên các TextField

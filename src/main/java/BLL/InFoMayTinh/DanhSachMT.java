@@ -102,7 +102,6 @@ public class DanhSachMT {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        System.out.println(count);
         return count;
     }
 

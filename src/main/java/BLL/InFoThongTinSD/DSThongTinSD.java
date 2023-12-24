@@ -13,12 +13,15 @@ import static mainscript.quanlytiemnet.MainController.StackingOnl;
 
 public class DSThongTinSD {
     List<ThongTinSuDung> DSThongTinSD = new ThongTinSuDungDAO().getAll();
+
     public List<ThongTinSuDung> getDSThongTinSD() {
         return DSThongTinSD;
     }
+
     public void setDSThongTinSD(List<ThongTinSuDung> DSThongTinSD) {
         this.DSThongTinSD = DSThongTinSD;
     }
+
     public void themSuLKgiuaTKvaMay(TaiKhoan tk, String maMay){
         LocalDateTime now = LocalDateTime.now();
         ThongTinSuDung ttsd = new ThongTinSuDung(maMay, tk.getUsername(), tk.getSdt(), true, now, now);
@@ -29,6 +32,7 @@ public class DSThongTinSD {
             throw new RuntimeException(e);
         }
     }
+
     public ThongTinSuDung TimTKdagSDtrongThongTinSD(String maMay){
         for(ThongTinSuDung ttsd : DSThongTinSD){
             if(ttsd.getMaMay().equals(maMay) && ttsd.getDagSD()){
@@ -38,6 +42,7 @@ public class DSThongTinSD {
         System.out.println("Không tìm được tài khoản trong thông tin sử dụng theo mã máy!!!");
         return null;
     }
+
     public ThongTinSuDung TimMTdagSDtrongThongTinSD(String sdt){
         for(ThongTinSuDung ttsd : DSThongTinSD){
             if(ttsd.getSdt().equals(sdt) && ttsd.getDagSD()){
@@ -47,6 +52,7 @@ public class DSThongTinSD {
         System.out.println("Không tìm được máy trong thông tin sử dụng theo sđt!!!");
         return null;
     }
+
     public List <ThongTinSuDung> LayCacMayDagSDTrongTTSD(){
         List <ThongTinSuDung> res = new ArrayList<>();
         for(ThongTinSuDung ttsd : DSThongTinSD){

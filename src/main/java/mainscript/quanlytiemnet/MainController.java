@@ -2,6 +2,7 @@ package mainscript.quanlytiemnet;
 
 import BLL.InFoMayTinh.DanhSachMT;
 import BLL.InFoTaiKhoan.DanhSachTK;
+import BLL.InFoTaiKhoan.TaiKhoan;
 import BLL.InFoThongTinSD.DSThongTinSD;
 import BLL.InFoThongTinSD.ThongTinSuDung;
 import BLL.MainControllerStatusManagement;
@@ -16,6 +17,7 @@ import javafx.fxml.Initializable;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,6 +36,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MainController implements Initializable {
+
+    public static boolean checkingTimeline = true;
 
     public static List<ThongTinSuDung> StackingOnl = new ArrayList<>();
 
@@ -64,23 +68,55 @@ public class MainController implements Initializable {
     }
     Timeline timeline = new Timeline(
             new KeyFrame(Duration.seconds(1), e -> {
+                LocalDateTime now = LocalDateTime.now();
                 Iterator<ThongTinSuDung> iterator = StackingOnl.iterator();
+
+                for(ThongTinSuDung ttsd : new DSThongTinSD().LayCacMayDagSDTrongTTSD()){
+                    if(ttsd.getTgKetThuc().format(formatter).equals(now.format(formatter))){
+                        try {
+                            TaiKhoan tk = new DanhSachTK().TimTKTraVeTK(ttsd.getUsername(), ttsd.getSdt());
+                            tk.setDangSD(false);
+                            new DanhSachTK().CapNhatTaiKhoan(tk);
+                        } catch (Exception ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+                    }
+                }
+
                 while (iterator.hasNext()) {
                     ThongTinSuDung ttsdStack = iterator.next();
                     for (ThongTinSuDung ttsd : new ThongTinSuDungDAO().getAll()) {
                         if (ttsd.getTgBatDau().format(formatter).equals(ttsdStack.getTgBatDau().format(formatter)) && !(ttsd.getDagSD())) {
+
                             iterator.remove();
                             ChuyenCanhFXML object = new ChuyenCanhFXML();
                             Pane view = object.getPage("/TrangThaiMayTinh/MainTrangThaiMT.fxml");
                             MainSwitching.setCenter(view);
+                            CapNhatMainStatus();
+
                             Platform.runLater(() -> {
-                                showAlert("Thông báo", "Đã ngắt kết nối máy " + ttsdStack.getMaMay() + " do sđt " + ttsdStack.getSdt() + " đã hết tiền", Alert.AlertType.INFORMATION);
+                                if(checkingTimeline){
+                                    showAlert("Thông báo", "Đã ngắt kết nối máy " + ttsdStack.getMaMay() + " do sđt " + ttsdStack.getSdt() + " đã hết tiền", Alert.AlertType.INFORMATION);
+                                }
+                                checkingTimeline = true;
+                                XuLyTKAmTien();
                             });
                         }
                     }
                 }
             })
     );
+
+    public void XuLyTKAmTien(){
+        for(TaiKhoan tk : new DanhSachTK().getDSTaiKhoan()){
+            if(tk.getSoTienConLai() < 0){
+                tk.setSoTienConLai(0);
+                new DanhSachTK().CapNhatTaiKhoan(tk);
+            }
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         StackingOnl = new DSThongTinSD().LayCacMayDagSDTrongTTSD();
@@ -101,6 +137,7 @@ public class MainController implements Initializable {
     }
     @FXML
     public void ChonDSKH(ActionEvent event) {
+
         ChuyenCanhFXML object = new ChuyenCanhFXML();
         Pane view = object.getPage("/DanhSachTK/MainDSTK.fxml");
         MainSwitching.setCenter(view);
