@@ -424,10 +424,12 @@ public class Phong_thuong_2_Controller implements Initializable {
                             TaiKhoan tk = new DanhSachTK().TimTKTraVeTK(ttsd.getUsername(), ttsd.getSdt());
                             tk.setDangSD(false);
                             new DanhSachTK().CapNhatTaiKhoan(tk);
+
                             String temp = ttsd.getMaMay().toLowerCase();
                             String id = temp.substring(0, 1).toUpperCase() + temp.substring(1);
                             Circle circle = getCircleById(id);
                             circle.setFill(Paint.valueOf("#969696"));
+
                             ResetTrangThai();
                             CapNhatLaiMainStatus();
                             Platform.runLater(() -> {

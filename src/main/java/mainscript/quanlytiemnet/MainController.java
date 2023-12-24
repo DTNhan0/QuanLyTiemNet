@@ -44,6 +44,9 @@ public class MainController implements Initializable {
         SoMayOnl.setText(String.valueOf(new DanhSachMT().MayDangONL()));
         SoMayCoSan.setText(String.valueOf(new DanhSachMT().MayCoSan()));
         MainControllerStatusManagement.setMainController(this);
+        ChuyenCanhFXML object = new ChuyenCanhFXML();
+        Pane view = object.getPage("/DanhSachTK/MainDSTK.fxml");
+        MainSwitching.setCenter(view);
     }
 
     public void CapNhatMainStatus(){

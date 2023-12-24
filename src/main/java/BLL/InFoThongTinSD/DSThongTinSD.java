@@ -35,6 +35,15 @@ public class DSThongTinSD {
         System.out.println("Không tìm được tài khoản trong thông tin sử dụng theo mã máy!!!");
         return null;
     }
+    public ThongTinSuDung TimMTdagSDtrongThongTinSD(String sdt){
+        for(ThongTinSuDung ttsd : DSThongTinSD){
+            if(ttsd.getSdt().equals(sdt) && ttsd.getDagSD()){
+                return ttsd;
+            }
+        }
+        System.out.println("Không tìm được máy trong thông tin sử dụng theo sđt!!!");
+        return null;
+    }
     public List <ThongTinSuDung> LayCacMayDagSDTrongTTSD(){
         List <ThongTinSuDung> res = new ArrayList<>();
         for(ThongTinSuDung ttsd : DSThongTinSD){
