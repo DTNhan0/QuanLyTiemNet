@@ -105,4 +105,31 @@ public class DanhSachMT {
         return count;
     }
 
+    public int MayBiHong(){
+        int count = 0;
+        try {
+            for(MayTinh mt : new MayTinhDAO().getAll()){
+                if(mt.isCoSan() == false && mt.isTrangThai() == false){
+                    count++;
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return count;
+    }
+
+    public int MayBaoTri(){
+        int count = 0;
+        try {
+            for(MayTinh mt : new MayTinhDAO().getAll()){
+                if(mt.isCoSan() == true && mt.isTrangThai() == false){
+                    count++;
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return count;
+    }
 }

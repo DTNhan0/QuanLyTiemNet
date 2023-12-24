@@ -4,12 +4,14 @@ import BLL.InFoMayTinh.DanhSachMT;
 import BLL.InFoMayTinh.MayTinh;
 import BLL.InFoTaiKhoan.DanhSachTK;
 import BLL.InFoTaiKhoan.TaiKhoan;
+import BLL.MainControllerStatusManagement;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import mainscript.quanlytiemnet.MainController;
 
 import java.net.URL;
 import java.sql.Date;
@@ -19,6 +21,9 @@ import java.util.ResourceBundle;
 
 public class DSMayTinhController implements Initializable {
     List <MayTinh> DSMayTinh = new DanhSachMT().getDSMayTinh();
+
+    @FXML
+    private TextField TimKiemTF;
 
     @FXML
     private TableView<MayTinh> BangDSMT;
@@ -105,10 +110,11 @@ public class DSMayTinhController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        LamMoi();
         String[] cacPhong = {"T01", "T02", "VIP01"};
         PhongCB.getItems().addAll(cacPhong);
         PhongCB.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 12px; -fx-text-fill: WHITE;");
-
+        PhongCB.setPromptText("(Chọn phòng)");
         BangDSMT.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 // Hiển thị thông tin tài khoản được chọn lên các TextField
@@ -146,7 +152,7 @@ public class DSMayTinhController implements Initializable {
             Date NgayMua = Date.valueOf(ngayMuaValue);
 
             // Kiểm tra xem mã máy đã tồn tại hay chưa
-            if (CheckMaMayTonTai(Mamay) || CheckMayTrongPhongHopLe(Mamay ,Phong) || Mamay.length() != 6) {
+            if (CheckMaMayTonTai(Mamay) || CheckMayTrongPhongHopLe(Mamay ,Phong) || Mamay.length() != 6 || !(Mamay.substring(0,3).equals("MAY"))) {
                 showAlert("Lỗi!!!", "Lỗi, mã máy đã tồn tại hoặc mã máy phải đúng theo phòng!!!", Alert.AlertType.ERROR);
                 return;
             }
@@ -158,6 +164,12 @@ public class DSMayTinhController implements Initializable {
                 showAlert("Thông báo", "Đã thêm máy có mã: " + mt.getMaMay(), Alert.AlertType.CONFIRMATION);
                 new DanhSachMT().ThemMay(mt);
                 CapNhatLaiTableView();
+
+                MainController mainController = MainControllerStatusManagement.getMainController();
+                if (mainController != null) {
+                    mainController.CapNhatMainStatus();
+                }
+
             } catch (Exception e) {
                 System.out.println("Lỗi thêm máy vào DBS");
             }
@@ -219,6 +231,12 @@ public class DSMayTinhController implements Initializable {
                         // Xóa máy trên Database
                         new DanhSachMT().XoaMay(mt);
                         CapNhatLaiTableView();
+
+                        MainController mainController = MainControllerStatusManagement.getMainController();
+                        if (mainController != null) {
+                            mainController.CapNhatMainStatus();
+                        }
+
                     } catch (Exception e) {
                         System.out.println("Xóa máy trên Database thất bại!!!");
                     }
@@ -284,16 +302,47 @@ public class DSMayTinhController implements Initializable {
     }
 
     public void LamMoi() {
+        TimKiemTF.setText(null);
         MMayTF.setText(null);
         BaoHanhTF.setText(null);
         NgayMuaTF.setValue(null);
         MMayTF.setText(null);
-        PhongCB.setValue("(Chọn phòng)");
+        PhongCB.setValue(null);
+        PhongCB.setPromptText("(Chọn phòng)");
         ThemBT.setDisable(false);
         MMayTF.setDisable(false);
         PhongCB.setDisable(false);
         BangDSMT.refresh();
         BangDSMT.getSelectionModel().clearSelection();
+    }
+
+    public void TimKiem(){
+        try {
+            if (TimKiemTF.getText().isEmpty()) {
+                showAlert("Lỗi", "Lỗi, không được bỏ trống!!!", Alert.AlertType.ERROR);
+            } else if (TimKiemTF.getText().length() != 6 || !(TimKiemTF.getText().substring(0, 3).equals("MAY")) || !(TimKiemTF.getText().substring(3).matches("\\d+"))) {
+                showAlert("Lỗi", "Lỗi, mã máy phải có đủ 6 ký tự và phải là mã máy hợp lệ!!!", Alert.AlertType.ERROR);
+            } else {
+                Boolean check = true;
+                if (CheckMaMayTonTai(TimKiemTF.getText())) {
+                    for(MayTinh mt : DSMayTinh){
+                        if(mt.getMaMay().equals(TimKiemTF.getText())){
+                            check = false;
+                            BangDSMT.getSelectionModel().select(mt);
+                            BangDSMT.scrollTo(mt);
+                            BangDSMT.requestFocus();
+                            showAlert("Xác nhận", "Đã tìm thấy máy tính có mã: " + TimKiemTF.getText(), Alert.AlertType.CONFIRMATION);
+                            break;
+                        }
+                    }
+                }
+                if(check){
+                    showAlert("Thông báo", "Không tìm thấy máy tính có mã: " + TimKiemTF.getText() + ". Vui lòng thử lại", Alert.AlertType.CONFIRMATION);
+                }
+            }
+        }catch (NullPointerException exception){
+            showAlert("Lỗi", "Lỗi, không được bỏ trống!!!", Alert.AlertType.ERROR);
+        }
     }
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {

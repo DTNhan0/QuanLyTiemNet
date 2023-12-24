@@ -152,7 +152,6 @@ public class LoginController implements Initializable {
         TaiKhoanDAO dao = new TaiKhoanDAO();
         try {
             TaiKhoan tk = dao.KtraTenvaPassTK(username, password);
-            new DanhSachTK().setTaiKhoanDangNhap(tk);
             if (tk != null) {
                 // Nếu có kết quả từ cơ sở dữ liệu, thông báo đăng nhập thành công
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -162,6 +161,8 @@ public class LoginController implements Initializable {
                 alert.showAndWait();
 
                 try {
+                    new DanhSachTK();
+                    DanhSachTK.setTaiKhoanDangNhap(tk);
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/mainscript/quanlytiemnet/MainGiaoDien.fxml"));
                     Parent root = loader.load();
 

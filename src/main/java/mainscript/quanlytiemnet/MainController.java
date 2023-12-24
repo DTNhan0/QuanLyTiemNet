@@ -1,5 +1,10 @@
 package mainscript.quanlytiemnet;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import BLL.InFoMayTinh.DanhSachMT;
 import BLL.InFoTaiKhoan.DanhSachTK;
 import BLL.InFoTaiKhoan.TaiKhoan;
@@ -7,11 +12,9 @@ import BLL.InFoThongTinSD.DSThongTinSD;
 import BLL.InFoThongTinSD.ThongTinSuDung;
 import BLL.MainControllerStatusManagement;
 import DAL.ThongTinSuDungDAO;
-import GUI.TrangThaiMT.Phong_thuong_1_Controller;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
@@ -19,18 +22,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
-import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -41,10 +38,14 @@ public class MainController implements Initializable {
 
     public static List<ThongTinSuDung> StackingOnl = new ArrayList<>();
 
-    public BorderPane MainSwitching;
+    @FXML
+    private StackPane MainPane;
 
     @FXML
-    private AnchorPane StatusPane;
+    private BorderPane MainSwitching;
+
+    @FXML
+    private Label SoMayBaoTri;
 
     @FXML
     private Label SoMayCoSan;
@@ -56,7 +57,13 @@ public class MainController implements Initializable {
     private Label SoMayOnl;
 
     @FXML
+    private AnchorPane StatusPane;
+
+    @FXML
     private Label TenAdmin;
+
+    @FXML
+    private Label TongThoiGianHomNay;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     public void showAlert(String title, String content, Alert.AlertType alertType) {
@@ -121,8 +128,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         StackingOnl = new DSThongTinSD().LayCacMayDagSDTrongTTSD();
         TenAdmin.setText(new DanhSachTK().getTaiKhoanDangNhap().getUsername());
-        SoMayOnl.setText(String.valueOf(new DanhSachMT().MayDangONL()));
-        SoMayCoSan.setText(String.valueOf(new DanhSachMT().MayCoSan()));
+        CapNhatMainStatus();
         MainControllerStatusManagement.setMainController(this);
         ChuyenCanhFXML object = new ChuyenCanhFXML();
         Pane view = object.getPage("/DanhSachTK/MainDSTK.fxml");
@@ -134,32 +140,70 @@ public class MainController implements Initializable {
     public void CapNhatMainStatus(){
         SoMayOnl.setText(String.valueOf(new DanhSachMT().MayDangONL()));
         SoMayCoSan.setText(String.valueOf(new DanhSachMT().MayCoSan()));
+        SoMayHong.setText(String.valueOf(new DanhSachMT().MayBiHong()));
+        SoMayBaoTri.setText(String.valueOf(new DanhSachMT().MayBaoTri()));
+        TongThoiGianHomNay.setText(new DSThongTinSD().TongGioChoiHomNay());
     }
     @FXML
-    public void ChonDSKH(ActionEvent event) {
-
+    public void ChonDSKH() {
+        CapNhatMainStatus();
         ChuyenCanhFXML object = new ChuyenCanhFXML();
         Pane view = object.getPage("/DanhSachTK/MainDSTK.fxml");
         MainSwitching.setCenter(view);
     }
 
     @FXML
-    public void ChonTK(ActionEvent event) {
+    public void ChonTK() {
+        CapNhatMainStatus();
         ChuyenCanhFXML object = new ChuyenCanhFXML();
         Pane view = object.getPage("/ThongKe/MainTK.fxml");
         MainSwitching.setCenter(view);
     }
+
     @FXML
     public void ChonTrangThaiMT() {
+        CapNhatMainStatus();
         ChuyenCanhFXML object = new ChuyenCanhFXML();
         Pane view = object.getPage("/TrangThaiMayTinh/MainTrangThaiMT.fxml");
         MainSwitching.setCenter(view);
     }
 
     @FXML
-    public void ChonDSMT(ActionEvent event) {
+    public void ChonDSMT() {
+        CapNhatMainStatus();
         ChuyenCanhFXML object = new ChuyenCanhFXML();
         Pane view = object.getPage("/DSMayTinh/MainDSMT.fxml");
         MainSwitching.setCenter(view);
+    }
+
+    public void ChonDangXuat(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Xác nhận đăng xuất");
+        alert.setHeaderText(null);
+        alert.setContentText("Bạn có chắc chắn muốn đăng xuất?");
+
+        // Lấy kết quả người dùng chọn
+        Optional<ButtonType> result = alert.showAndWait();
+
+        // Xử lý kết quả
+        if (result.orElse(ButtonType.CANCEL) == ButtonType.OK) {
+            // Nếu người dùng chọn "Có", thực hiện đăng xuất và chuyển đến trang login.fxml
+
+            // Close the current stage (MainController's stage)
+            Stage currentStage = (Stage) MainPane.getScene().getWindow();
+            currentStage.close();
+
+            try {
+                // Open the login stage
+                FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+                Parent loginRoot = loginLoader.load();
+                Stage loginStage = new Stage();
+                loginStage.setTitle("Quản lý Net");
+                loginStage.setScene(new Scene(loginRoot, 800, 535));
+                loginStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -4,10 +4,12 @@ import BLL.InFoMayTinh.MayTinh;
 import BLL.InFoTaiKhoan.TaiKhoan;
 import DAL.TaiKhoanDAO;
 import DAL.ThongTinSuDungDAO;
+import java.time.Duration;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 import static mainscript.quanlytiemnet.MainController.StackingOnl;
 
@@ -61,5 +63,27 @@ public class DSThongTinSD {
             }
         }
         return res;
+    }
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public String TongGioChoiHomNay() {
+        LocalTime sum = LocalTime.MIN;
+        LocalDateTime now = LocalDateTime.now();
+        for (ThongTinSuDung ttsd : new ThongTinSuDungDAO().getAll()) {
+            if (!ttsd.getDagSD() && ttsd.getTgKetThuc().format(formatter2).equals(now.format(formatter2))) {
+                LocalTime startTime = ttsd.getTgBatDau().toLocalTime();
+                LocalTime endTime = ttsd.getTgKetThuc().toLocalTime();
+
+                // Tính độ chênh lệch giữa thời điểm bắt đầu và kết thúc
+                Duration duration = Duration.between(startTime, endTime);
+
+                // Cộng dồn thời gian
+                sum = sum.plusSeconds((long) duration.toSeconds());
+            }
+        }
+
+        // Chuyển đổi tổng thời gian thành định dạng HH:mm
+        return sum.format(formatter);
     }
 }

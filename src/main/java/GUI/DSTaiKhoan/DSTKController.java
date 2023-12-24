@@ -6,9 +6,11 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import org.w3c.dom.events.MouseEvent;
 
 import java.net.URL;
 import java.util.List;
@@ -16,6 +18,12 @@ import java.util.ResourceBundle;
 
 public class DSTKController implements Initializable {
         List <TaiKhoan> DSTK = new DanhSachTK().getDSTaiKhoan();
+
+        @FXML
+        private TextField TimKiemTF;
+
+        @FXML
+        private JFXButton TimKiemBT;
 
         @FXML
         private TableView<TaiKhoan> BangDSKH;
@@ -96,12 +104,15 @@ public class DSTKController implements Initializable {
 
         @FXML
         public void ResetThongTinNhap() {
+                TimKiemTF.clear();
                 HangTVTF.clear();
                 PassTF.clear();
                 SdtTF.clear();
                 SoTienNapTF.clear();
                 TaiKhoanTF.clear();
 
+                TimKiemTF.setPromptText("(Nhập sđt)");
+                SoTienNapTF.setPromptText("(Vd: 10000)");
                 TaiKhoanTF.setEditable(true);
                 TaiKhoanTF.setDisable(false);
                 SdtTF.setEditable(true);
@@ -113,12 +124,11 @@ public class DSTKController implements Initializable {
                 HangTVTF.setEditable(true);
                 PassTF.setEditable(true);
                 PassTF.setDisable(false);
-                SoTienNapTF.setEditable(true);
-                SoTienNapTF.setDisable(false);
+                SoTienNapTF.setDisable(true);
 
                 XoaTK.setDisable(false);
                 SuaTK.setDisable(false);
-                NapTienBT.setDisable(false);
+                NapTienBT.setDisable(true);
                 ThemTK.setDisable(false);
 
                 NutAdmin.setSelected(false);
@@ -211,51 +221,39 @@ public class DSTKController implements Initializable {
 
         private void hienThiThongTinTaiKhoan(TaiKhoan tk) {
                 TaiKhoan dangnhap = new DanhSachTK().getTaiKhoanDangNhap();
-                HangTVTF.setText(tk.getHangthanhvien());
-                PassTF.setText(tk.getPassword());
-                SdtTF.setText(tk.getSdt());
-                SoTienNapTF.setText(null);
                 TaiKhoanTF.setText(tk.getUsername());
-                if(tk.isRole()){
-                NutAdmin.setSelected(true);
-                }else{
-                NutKH.setSelected(true);
-                }
-                // Ko cho nhap username va sdt
-                TaiKhoanTF.setEditable(false);
+                SdtTF.setText(tk.getSdt());
+                PassTF.setText(tk.getPassword());
                 TaiKhoanTF.setDisable(true);
-                ThemTK.setDisable(true);
-                SdtTF.setEditable(false);
                 SdtTF.setDisable(true);
+                if(tk.isRole()){
+                        NutAdmin.setSelected(true);
+                }else{
+                        NutKH.setSelected(true);
+                }
+                HangTVTF.setText(tk.getHangthanhvien());
+                SoTienNapTF.setText(null);
+                SoTienNapTF.setDisable(false);
+                NapTienBT.setDisable(false);
+
                 if((tk.getUsername().equals(dangnhap.getUsername()) && tk.getSdt().equals(dangnhap.getSdt()))){
-                        NutAdmin.setDisable(true);
-                        NutKH.setDisable(true);
-                        HangTVTF.setDisable(true);
-                        HangTVTF.setEditable(false);
-                        PassTF.setEditable(false);
-                        PassTF.setDisable(true);
-                        SoTienNapTF.setEditable(false);
-                        SoTienNapTF.setDisable(true);
-                        XoaTK.setDisable(true);
-                        SuaTK.setDisable(true);
-                        NapTienBT.setDisable(true);
-                        if(tk.isDangSD() && tk.isRole() == false){
-                                SoTienNapTF.setEditable(true);
-                                SoTienNapTF.setDisable(false);
-                                NapTienBT.setDisable(false);
-                        }
+                      PassTF.setDisable(true);
+                      NutAdmin.setDisable(true);
+                      NutKH.setDisable(true);
+                      HangTVTF.setDisable(true);
+
+                      ThemTK.setDisable(true);
+                      XoaTK.setDisable(true);
+                      SuaTK.setDisable(true);
                 }else {
+                        PassTF.setDisable(false);
                         NutAdmin.setDisable(false);
                         NutKH.setDisable(false);
                         HangTVTF.setDisable(false);
-                        HangTVTF.setEditable(true);
-                        PassTF.setEditable(true);
-                        PassTF.setDisable(false);
-                        SoTienNapTF.setEditable(true);
-                        SoTienNapTF.setDisable(false);
+
+                        ThemTK.setDisable(false);
                         XoaTK.setDisable(false);
                         SuaTK.setDisable(false);
-                        NapTienBT.setDisable(false);
                 }
         }
 
@@ -270,12 +268,15 @@ public class DSTKController implements Initializable {
                         if (soTienNap.isEmpty()) {
                                 throw new NullPointerException();
                         }
-
-                        TaiKhoan tk = BangDSKH.getSelectionModel().getSelectedItem();
-                        showAlert("Nạp tiền thành công!!!", "Bạn đã nạp " + soTienNap + " thành công vào tk có sđt:" + tk.getSdt(), Alert.AlertType.CONFIRMATION);
-                        new DanhSachTK().NapTien(tk, Double.parseDouble(soTienNap));
-                        CapNhatLaiTableView();
-                        BangDSKH.refresh();
+                        if(!(SoTienNapTF.getText().matches("\\d+"))){
+                                showAlert("Lỗi!!!", "Lỗi, số tiền nạp không hợp lệ!!!", Alert.AlertType.ERROR);
+                        } else {
+                                TaiKhoan tk = BangDSKH.getSelectionModel().getSelectedItem();
+                                showAlert("Nạp tiền thành công!!!", "Bạn đã nạp " + soTienNap + " thành công vào tk có sđt:" + tk.getSdt(), Alert.AlertType.CONFIRMATION);
+                                new DanhSachTK().NapTien(tk, Double.parseDouble(soTienNap));
+                                CapNhatLaiTableView();
+                                BangDSKH.refresh();
+                        }
                 } catch (NullPointerException exception) {
                         showAlert("Lỗi!!!", "Không được để trống số tiền nạp!!!", Alert.AlertType.ERROR);
                 }
@@ -283,6 +284,7 @@ public class DSTKController implements Initializable {
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
+                ResetThongTinNhap();
                 BangDSKH.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 if (newSelection != null) {
                         // Hiển thị thông tin tài khoản được chọn lên các TextField
@@ -299,6 +301,31 @@ public class DSTKController implements Initializable {
                 UsernameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
                 VaiTroCol.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isRole()).asObject());
                 BangDSKH.getItems().addAll(DSTK);
+        }
+
+        public void TimKiemTK(){
+                if(TimKiemTF.getText().isEmpty()){
+                        showAlert("Lỗi", "Lỗi, vui lòng không bỏ trống!!!", Alert.AlertType.ERROR);
+                }else if (TimKiemTF.getText().length() != 10){
+                        showAlert("Lỗi", "Lỗi, vui lòng nhập đủ 10 số!!!", Alert.AlertType.ERROR);
+                }else if (!(TimKiemTF.getText().matches("\\d+"))) {
+                        showAlert("Lỗi", "Lỗi, vui lòng nhập số điện thoại hợp lệ!!!", Alert.AlertType.ERROR);
+                }else{
+                        boolean check = true;
+                        for(TaiKhoan tk : DSTK){
+                                if(tk.getSdt().equals(TimKiemTF.getText())){
+                                        BangDSKH.getSelectionModel().select(tk);
+                                        BangDSKH.scrollTo(tk);
+                                        BangDSKH.requestFocus();
+                                        showAlert("Xác nhận", "Đã tìm thấy tk có sđt: " + TimKiemTF.getText(), Alert.AlertType.CONFIRMATION);
+                                        check = false;
+                                        break;
+                                }
+                        }
+                        if (check){
+                                showAlert("Thông báo", "Không tìm thấy tài khoản có sđt: " + TimKiemTF.getText() + ". Vui lòng thử lại", Alert.AlertType.CONFIRMATION);
+                        }
+                }
         }
 
         private void showAlert(String title, String content, Alert.AlertType alertType) {

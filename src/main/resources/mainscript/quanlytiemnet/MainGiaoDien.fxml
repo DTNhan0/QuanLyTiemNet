@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainscript.quanlytiemnet.MainController">
+<StackPane fx:id="MainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainscript.quanlytiemnet.MainController">
     <children>
         <BorderPane fx:id="MainSwitching" prefHeight="200.0" prefWidth="200.0" styleClass="MainColor" stylesheets="@../../CSS/MainGiaoDien.css">
             <top>
@@ -94,7 +94,7 @@
                                                 <String fx:value="AnchorPaneTron" />
                                             </styleClass>
                                             <children>
-                                                <Label layoutX="175.0" layoutY="33.0" text="???" textFill="WHITE">
+                                                <Label fx:id="TongThoiGianHomNay" layoutX="159.0" layoutY="33.0" text="???" textFill="WHITE">
                                                     <font>
                                                         <Font name="System Bold" size="15.0" />
                                                     </font>
@@ -111,7 +111,7 @@
                                                 </ImageView>
                                             </children>
                                         </AnchorPane>
-                                        <AnchorPane layoutX="877.0" layoutY="14.0" prefHeight="86.0" prefWidth="255.0" stylesheets="@../../CSS/MainGiaoDien.css">
+                                        <AnchorPane layoutX="867.0" layoutY="14.0" prefHeight="86.0" prefWidth="255.0" stylesheets="@../../CSS/MainGiaoDien.css">
                                             <styleClass>
                                                 <String fx:value="RandomColor" />
                                                 <String fx:value="AnchorPaneTron" />
@@ -134,6 +134,29 @@
                                                 </ImageView>
                                             </children>
                                         </AnchorPane>
+                              <AnchorPane layoutX="1156.0" layoutY="14.0" prefHeight="86.0" prefWidth="255.0" stylesheets="@../../CSS/MainGiaoDien.css">
+                                 <styleClass>
+                                    <String fx:value="RandomColor" />
+                                    <String fx:value="AnchorPaneTron" />
+                                 </styleClass>
+                                 <children>
+                                    <Label fx:id="SoMayBaoTri" layoutX="198.0" layoutY="33.0" text="???" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="81.0" layoutY="33.0" text="Đang bảo trì:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="55.0" fitWidth="60.0" layoutX="14.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../Icon/maintenance.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
                                     </children>
                                 </AnchorPane>
                             </content>
@@ -146,11 +169,6 @@
                     <children>
                         <Separator layoutY="81.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                         <Label layoutX="26.0" layoutY="7.0" text="Welcome Admin" textAlignment="CENTER" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="23.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="TenAdmin" alignment="CENTER" contentDisplay="CENTER" layoutX="78.0" layoutY="41.0" text="???" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="23.0" />
                             </font>
@@ -218,7 +236,7 @@
                                         </ImageView>
                                     </graphic>
                                 </JFXButton>
-                                <JFXButton alignment="BASELINE_LEFT" graphicTextGap="8.0" prefHeight="25.0" prefWidth="229.0" styleClass="Button" stylesheets="@../../CSS/ButtonXin.css" text="Đăng xuất" textFill="WHITE">
+                                <JFXButton alignment="BASELINE_LEFT" graphicTextGap="8.0" onAction="#ChonDangXuat" prefHeight="25.0" prefWidth="229.0" styleClass="Button" stylesheets="@../../CSS/ButtonXin.css" text="Đăng xuất" textFill="WHITE">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
@@ -232,6 +250,15 @@
                                 </JFXButton>
                             </children>
                         </VBox>
+                  <AnchorPane layoutX="15.0" layoutY="41.0" prefHeight="36.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Label fx:id="TenAdmin" alignment="CENTER" contentDisplay="CENTER" layoutX="95.0" layoutY="1.0" prefHeight="34.0" prefWidth="123.0" text="null" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="System Bold" size="23.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                     </children>
                 </AnchorPane>
             </left>

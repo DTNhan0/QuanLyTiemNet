@@ -233,6 +233,7 @@ public class Phong_thuong_1_Controller implements Initializable {
             ThongTinSuDung ttsd = new DSThongTinSD().TimTKdagSDtrongThongTinSD(selectedIDMayFormat.toUpperCase());
             UserTF.setText(ttsd.getUsername());
             SdtTF.setText(ttsd.getSdt());
+            PassTF.setText("(Bảo mật thông tin)");
             UserTF.setDisable(true);
             SdtTF.setDisable(true);
             PassTF.setDisable(true);
@@ -313,9 +314,7 @@ public class Phong_thuong_1_Controller implements Initializable {
         NhapNDHong.setVisible(false);
         selectedIDMayFormat = chuyenChuoi(IDMay);
         HienThiThongTinNhap(e);
-
     }
-
     public void KhiKetNoi() {
         TaiKhoan tk = null;
         try {
@@ -323,7 +322,7 @@ public class Phong_thuong_1_Controller implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        if(tk == null || tk.getSoTienConLai() == 0) {
+        if(tk == null || tk.getSoTienConLai() == 0 || !(tk.getPassword().equals(PassTF.getText()))) {
             showAlert("Lỗi!!!", "Vui lòng kiểm tra lại số tiền trong tài khoản hoặc thông tin nhập!!!", Alert.AlertType.ERROR);
             System.out.println("Vui lòng kiểm tra lại tài khoản");
         }else{
