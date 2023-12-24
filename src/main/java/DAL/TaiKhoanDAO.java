@@ -86,7 +86,7 @@ public class TaiKhoanDAO {
     }
 
     public void CapNhatTKDBS(TaiKhoan tk) {
-        String sql = "UPDATE TAIKHOAN SET PASSWORD = ?, ROLE = ?, HANGTHANHVIEN = ?, DANGSUDUNG = ? WHERE USERNAME = ? AND SDT = ?";
+        String sql = "UPDATE TAIKHOAN SET PASSWORD = ?, ROLE = ?, HANGTHANHVIEN = ?, DANGSUDUNG = ?, SOTIENCONLAI = ? WHERE USERNAME = ? AND SDT = ?";
         try (
                 Connection con = new QLTiemNetConnectionDBS().getConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);
@@ -95,8 +95,9 @@ public class TaiKhoanDAO {
             pstm.setBoolean(2, tk.isRole());
             pstm.setString(3, tk.getHangthanhvien());
             pstm.setBoolean(4, tk.isDangSD());
-            pstm.setString(5, tk.getUsername());
-            pstm.setString(6, tk.getSdt());
+            pstm.setDouble(5, tk.getSoTienConLai());
+            pstm.setString(6, tk.getUsername());
+            pstm.setString(7, tk.getSdt());
 
             int rowsAffected = pstm.executeUpdate();
             if (rowsAffected > 0) {

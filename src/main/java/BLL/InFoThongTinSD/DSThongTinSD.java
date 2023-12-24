@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static mainscript.quanlytiemnet.MainController.StackingOnl;
+
 public class DSThongTinSD {
     List<ThongTinSuDung> DSThongTinSD = new ThongTinSuDungDAO().getAll();
     public List<ThongTinSuDung> getDSThongTinSD() {
@@ -22,6 +24,7 @@ public class DSThongTinSD {
         ThongTinSuDung ttsd = new ThongTinSuDung(maMay, tk.getUsername(), tk.getSdt(), true, now, now);
         try {
             new ThongTinSuDungDAO().addThongTinSuDung(ttsd);
+            StackingOnl.add(ttsd);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

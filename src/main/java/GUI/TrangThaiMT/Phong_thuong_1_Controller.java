@@ -329,7 +329,6 @@ public class Phong_thuong_1_Controller implements Initializable {
             showAlert("Lỗi!!!", "Vui lòng kiểm tra lại số tiền trong tài khoản hoặc thông tin nhập!!!", Alert.AlertType.ERROR);
             System.out.println("Vui lòng kiểm tra lại tài khoản");
         }else{
-            System.out.println(selectedIDMayFormat);
             new DSThongTinSD().themSuLKgiuaTKvaMay(tk, selectedIDMayFormat.toUpperCase());
             showAlert("Thông báo", "Đã kết nối thành công tk có SĐT: " + SdtTF.getText() + " với " + HienIDMay.getText(), Alert.AlertType.CONFIRMATION);
         }
@@ -432,18 +431,6 @@ public class Phong_thuong_1_Controller implements Initializable {
                             TaiKhoan tk = new DanhSachTK().TimTKTraVeTK(ttsd.getUsername(), ttsd.getSdt());
                             tk.setDangSD(false);
                             new DanhSachTK().CapNhatTaiKhoan(tk);
-
-                            String temp = ttsd.getMaMay().toLowerCase();
-                            String id = temp.substring(0, 1).toUpperCase() + temp.substring(1);
-                            Circle circle = getCircleById(id);
-                            circle.setFill(Paint.valueOf("#969696"));
-
-                            ResetTrangThai();
-                            CapNhatLaiMainStatus();
-
-                            Platform.runLater(() -> {
-                                showAlert("Thông báo", "Đã ngắt kết nối máy " + ttsd.getMaMay() + " do sđt " + ttsd.getSdt() + " đã hết tiền", Alert.AlertType.INFORMATION);
-                            });
                         } catch (Exception ex) {
                             throw new RuntimeException(ex);
                         }
