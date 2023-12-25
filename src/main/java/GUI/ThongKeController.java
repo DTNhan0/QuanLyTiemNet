@@ -12,13 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.sql.Date;
@@ -111,12 +105,7 @@ public class ThongKeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        NgayDP.setDisable(true);
-        NgayDP.setValue(null);
-        TGBatDauDP.setDisable(true);
-        TGBatDauDP.setValue(null);
-        TGKetThucDP.setDisable(true);
-        TGKetThucDP.setValue(null);
+        refreshThongTin();
     }
 
     @FXML
@@ -139,7 +128,7 @@ public class ThongKeController implements Initializable {
     }
 
     @FXML
-    void refreshThongTin(ActionEvent event) {
+    void refreshThongTin() {
         NgayRB.setSelected(false);
         NgayRB.setDisable(false);
         KhoangThoiGianRB.setSelected(false);
@@ -160,161 +149,104 @@ public class ThongKeController implements Initializable {
     }
 
     @FXML
-    void xacNhan(ActionEvent event) throws Exception {
-        barChart.getData().clear();
-        if (NgayRB.isSelected()) {
-            LocalDate ngay = NgayDP.getValue();
-
-            Double doanhThuTheoNgay;
-            try {
-                doanhThuTheoNgay = new DSLichSuNap().getDoanhThuTheoNgay(ngay);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
+    private void displayDataForDate(LocalDate ngay) {
+        try {
+            Double doanhThuTheoNgay = new DSLichSuNap().getDoanhThuTheoNgay(ngay);
             doanhThuTF.setText(String.valueOf(doanhThuTheoNgay));
 
-            LichSuNap doanhThuLonNhatTheoNgay;
-            try {
-                doanhThuLonNhatTheoNgay = new DSLichSuNap().getDoanhThuLonNhatTheoNgay(ngay);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            LichSuNap doanhThuLonNhatTheoNgay = new DSLichSuNap().getDoanhThuLonNhatTheoNgay(ngay);
+            tkNapTF.setText(doanhThuLonNhatTheoNgay != null ? String.valueOf(doanhThuLonNhatTheoNgay.getTaiKhoan()) : "Không có dữ liệu");
 
-            if (doanhThuLonNhatTheoNgay != null) {
-                tkNapTF.setText(String.valueOf(doanhThuLonNhatTheoNgay.getTaiKhoan()));
-            } else {
-                tkNapTF.setText("Không có dữ liệu");
-            }
+            ngayDoanhThuTF.clear();
+            doanhThuMaxTF.clear();
 
-            doanhThuMaxTF.setText("");
-            ngayDoanhThuTF.setText("");
+            displayLichSuNapTable(new DSLichSuNap().getDsLichSuNapTheoNgay(ngay));
 
-            List<LichSuNap> dsLichSuNapTheoNgay;
-            try {
-                dsLichSuNapTheoNgay = new DSLichSuNap().getDsLichSuNapTheoNgay(ngay);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            LocalDate nextDay = ngay.plusDays(1);
+            displayThongTinSuDungTable(new DSThongTinSD().getThongTinSuDungThongKe(ngay, nextDay));
 
-            bangLichSuNap.getItems().clear();
-            ID1Col.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-            taiKhoan1Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTaiKhoan()));
-            sdt1Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSdt()));
-            soTienCol.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSoTien()).asObject());
-            thoiGianNapCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTgNap()));
-            bangLichSuNap.getItems().addAll(dsLichSuNapTheoNgay);
-
-            List<ThongTinSuDung> dsTTSD;
-            try {
-                dsTTSD = new DSThongTinSD().getThongTinSuDungThongKe(ngay, LocalDate.from(ngay.atStartOfDay().plusDays(1)));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-            bangThongTinSuDung.getItems().clear();
-            ID2Col.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-            taiKhoan2Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
-            sdt2Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSdt()));
-            mayCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaMay()));
-            tgBatDauCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTgBatDau()));
-            tgKetThucCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTgKetThuc()));
-            bangThongTinSuDung.getItems().addAll(dsTTSD);
-
-            Integer soPhut;
-            try {
-                soPhut = new DSThongTinSD().getTongSoPhut(ngay, LocalDate.from(ngay.atStartOfDay().plusDays(1)));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-            Series series1 = new XYChart.Series<>();
-            series1.setName("Doanh thu");
-            series1.getData().add(new XYChart.Data<>("", doanhThuTheoNgay / 1000));
-
-            Series series2 = new XYChart.Series<>();
-            series2.setName("Số phút");
-            series2.getData().add(new XYChart.Data<>("", soPhut));
-            barChart.getData().addAll(series1, series2);
-        }
-        if (KhoangThoiGianRB.isSelected()) {
-            LocalDate ngayBatDau = TGBatDauDP.getValue();
-            LocalDate ngayKetThuc = TGKetThucDP.getValue();
-
-            Double doanhThuTheoTime;
-            try {
-                doanhThuTheoTime = new DSLichSuNap().getDoanhThuTheoTime(ngayBatDau, ngayKetThuc);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-            doanhThuTF.setText(String.valueOf(doanhThuTheoTime));
-
-            LichSuNap doanhThuLonNhatTheoTime;
-            try {
-                doanhThuLonNhatTheoTime = new DSLichSuNap().getDoanhThuLonNhatTheoTime(ngayBatDau, ngayKetThuc);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-            if (doanhThuLonNhatTheoTime != null) {
-                tkNapTF.setText(String.valueOf(doanhThuLonNhatTheoTime.getTaiKhoan()));
-            } else {
-                tkNapTF.setText("Không có dữ liệu");
-            }
-
-            LichSuNap doanhThuMax;
-            doanhThuMax = new DSLichSuNap().getDoanhThuMax(ngayBatDau, ngayKetThuc);
-            ngayDoanhThuTF.setText(String.valueOf(doanhThuMax.getTgNap().toLocalDate()));
-            doanhThuMaxTF.setText(String.valueOf(doanhThuMax.getSoTien()));
-
-            List<LichSuNap> dsLichSuNapTheoTime;
-            try {
-                dsLichSuNapTheoTime = new DSLichSuNap().getDsLichSuNapTheoTime(ngayBatDau, ngayKetThuc);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-            bangLichSuNap.getItems().clear();
-            ID1Col.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-            taiKhoan1Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTaiKhoan()));
-            sdt1Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSdt()));
-            soTienCol.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSoTien()).asObject());
-            thoiGianNapCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTgNap()));
-            bangLichSuNap.getItems().addAll(dsLichSuNapTheoTime);
-
-            List<ThongTinSuDung> dsTTSD;
-            try {
-                dsTTSD = new DSThongTinSD().getThongTinSuDungThongKe(ngayBatDau, ngayKetThuc);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-            bangThongTinSuDung.getItems().clear();
-            ID2Col.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-            taiKhoan2Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
-            sdt2Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSdt()));
-            mayCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaMay()));
-            tgBatDauCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTgBatDau()));
-            tgKetThucCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTgKetThuc()));
-            bangThongTinSuDung.getItems().addAll(dsTTSD);
-
-            Integer soPhut;
-            try {
-                soPhut = new DSThongTinSD().getTongSoPhut(ngayBatDau, ngayKetThuc);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-            Series series1 = new XYChart.Series<>();
-            series1.setName("Doanh thu");
-            series1.getData().add(new XYChart.Data<>("", doanhThuTheoTime / 1000));
-
-            Series series2 = new XYChart.Series<>();
-            series2.setName("Số phút");
-            series2.getData().add(new XYChart.Data<>("", soPhut));
-            barChart.getData().addAll(series1, series2);
+            Integer soPhut = new DSThongTinSD().getTongSoPhut(ngay, nextDay);
+            displayBarChart(doanhThuTheoNgay, soPhut);
+        } catch (Exception e) {
+            showAlert("Lỗi", "Lỗi, phải điền ngày tháng năm hợp lệ và không được bỏ trống!!!", Alert.AlertType.ERROR);
         }
     }
 
+    private void displayDataForDateRange(LocalDate ngayBatDau, LocalDate ngayKetThuc) {
+        try {
+            Double doanhThuTheoTime = new DSLichSuNap().getDoanhThuTheoTime(ngayBatDau, ngayKetThuc);
+            doanhThuTF.setText(String.valueOf(doanhThuTheoTime));
+
+            LichSuNap doanhThuLonNhatTheoTime = new DSLichSuNap().getDoanhThuLonNhatTheoTime(ngayBatDau, ngayKetThuc);
+            tkNapTF.setText(doanhThuLonNhatTheoTime != null ? String.valueOf(doanhThuLonNhatTheoTime.getTaiKhoan()) : "Không có dữ liệu");
+
+            LichSuNap doanhThuMax = new DSLichSuNap().getDoanhThuMax(ngayBatDau, ngayKetThuc);
+            ngayDoanhThuTF.setText(String.valueOf(doanhThuMax.getTgNap().toLocalDate()));
+            doanhThuMaxTF.setText(String.valueOf(doanhThuMax.getSoTien()));
+
+            displayLichSuNapTable(new DSLichSuNap().getDsLichSuNapTheoTime(ngayBatDau, ngayKetThuc));
+            displayThongTinSuDungTable(new DSThongTinSD().getThongTinSuDungThongKe(ngayBatDau, ngayKetThuc));
+
+            Integer soPhut = new DSThongTinSD().getTongSoPhut(ngayBatDau, ngayKetThuc);
+            displayBarChart(doanhThuTheoTime, soPhut);
+        } catch (Exception e) {
+            showAlert("Lỗi", "Lỗi, phải điền ngày tháng năm hợp lệ và không được bỏ trống!!!", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void displayLichSuNapTable(List<LichSuNap> dsLichSuNap) {
+        bangLichSuNap.getItems().clear();
+        ID1Col.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+        taiKhoan1Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTaiKhoan()));
+        sdt1Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSdt()));
+        soTienCol.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSoTien()).asObject());
+        thoiGianNapCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTgNap()));
+        bangLichSuNap.getItems().addAll(dsLichSuNap);
+    }
+
+    private void displayThongTinSuDungTable(List<ThongTinSuDung> dsTTSD) {
+        bangThongTinSuDung.getItems().clear();
+        ID2Col.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+        taiKhoan2Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
+        sdt2Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSdt()));
+        mayCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaMay()));
+        tgBatDauCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTgBatDau()));
+        tgKetThucCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTgKetThuc()));
+        bangThongTinSuDung.getItems().addAll(dsTTSD);
+    }
+
+    private void displayBarChart(Double doanhThu, Integer soPhut) {
+        barChart.getData().clear();
+
+        Series<String, Number> series1 = new XYChart.Series<>();
+        series1.setName("Doanh thu");
+        series1.getData().add(new XYChart.Data<>("", doanhThu / 1000));
+
+        Series<String, Number> series2 = new XYChart.Series<>();
+        series2.setName("Số phút");
+        series2.getData().add(new XYChart.Data<>("", soPhut));
+
+        barChart.getData().addAll(series1, series2);
+    }
+
+    @FXML
+    public void xacNhan() throws Exception {
+        barChart.getData().clear();
+        if (NgayRB.isSelected()) {
+            LocalDate ngay = NgayDP.getValue();
+            displayDataForDate(ngay);
+        } else if (KhoangThoiGianRB.isSelected()) {
+            LocalDate ngayBatDau = TGBatDauDP.getValue();
+            LocalDate ngayKetThuc = TGKetThucDP.getValue();
+            displayDataForDateRange(ngayBatDau, ngayKetThuc);
+        }
+    }
+
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }
