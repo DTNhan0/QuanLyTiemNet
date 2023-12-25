@@ -6,6 +6,7 @@ import DAL.TaiKhoanDAO;
 import DAL.ThongTinSuDungDAO;
 import java.time.Duration;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -85,5 +86,13 @@ public class DSThongTinSD {
 
         // Chuyển đổi tổng thời gian thành định dạng HH:mm
         return sum.format(formatter);
+    }
+
+    public List<ThongTinSuDung> getThongTinSuDungThongKe(LocalDate ngayBatDau, LocalDate ngayKetThuc) throws Exception {
+        return DSThongTinSD = new ThongTinSuDungDAO().getThongTinSuDung(ngayBatDau, ngayKetThuc);
+    }
+
+    public Integer getTongSoPhut(LocalDate ngayBatDau, LocalDate ngayKetThuc) throws Exception {
+        return new ThongTinSuDungDAO().getTongThoiGianChoi(ngayBatDau, ngayKetThuc);
     }
 }

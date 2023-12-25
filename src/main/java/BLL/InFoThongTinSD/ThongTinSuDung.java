@@ -3,6 +3,7 @@ package BLL.InFoThongTinSD;
 import java.time.LocalDateTime;
 
 public class ThongTinSuDung {
+    private Integer id;
     private String maMay, username, sdt;
     private Boolean DagSD;
     private LocalDateTime tgBatDau, tgKetThuc;
@@ -63,5 +64,13 @@ public class ThongTinSuDung {
 
     public void setTgKetThuc(LocalDateTime tgKetThuc) {
         this.tgKetThuc = tgKetThuc;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
