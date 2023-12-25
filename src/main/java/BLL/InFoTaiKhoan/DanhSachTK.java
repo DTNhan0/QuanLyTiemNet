@@ -1,11 +1,14 @@
 package BLL.InFoTaiKhoan;
 
+import BLL.InFoLichSuNap.LichSuNap;
 import BLL.InFoMayTinh.DanhSachMT;
 import BLL.InFoMayTinh.MayTinh;
 import BLL.InFoThongTinSD.DSThongTinSD;
 import BLL.InFoThongTinSD.ThongTinSuDung;
+import DAL.LichSuNapDAO;
 import DAL.TaiKhoanDAO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class DanhSachTK {
@@ -81,6 +84,8 @@ public class DanhSachTK {
         int index_TK = TimTaiKhoan(tk.getUsername(), tk.getSdt());
         if (index_TK != -1) {
             DSTaiKhoan.set(index_TK, tk);
+            LichSuNap lsn = new LichSuNap(tk.getUsername(), tk.getSdt(), TienMoi, LocalDateTime.now());
+            new LichSuNapDAO().themLichSuNapDBS(lsn);
             new TaiKhoanDAO().NaptienTK(tk, TienMoi);
         } else {
             System.out.println("Cập nhật không thành công!!!");

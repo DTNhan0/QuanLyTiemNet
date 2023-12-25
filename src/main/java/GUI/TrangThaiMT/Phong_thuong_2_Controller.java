@@ -351,7 +351,7 @@ public class Phong_thuong_2_Controller implements Initializable {
             mt.setTrangThai(false);
             new DanhSachMT().CapNhatMay(mt);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            showAlert("Lỗi", "Lỗi, máy " + selectedIDMayFormat.toUpperCase() + " không tồn tại, vui lòng kiểm tra lại danh sách máy!!!", Alert.AlertType.ERROR);
         }
         ResetTrangThai();
         CapNhatLaiMainStatus();
@@ -366,7 +366,7 @@ public class Phong_thuong_2_Controller implements Initializable {
             mt.setTrangThai(false);
             new DanhSachMT().CapNhatMay(mt);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            showAlert("Lỗi", "Lỗi, máy " + selectedIDMayFormat.toUpperCase() + " không tồn tại, vui lòng kiểm tra lại danh sách máy!!!", Alert.AlertType.ERROR);
         }
         ResetTrangThai();
         CapNhatLaiMainStatus();
@@ -381,7 +381,7 @@ public class Phong_thuong_2_Controller implements Initializable {
             mt.setTrangThai(true);
             new DanhSachMT().CapNhatMay(mt);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            showAlert("Lỗi", "Lỗi, máy " + selectedIDMayFormat.toUpperCase() + " không tồn tại, vui lòng kiểm tra lại danh sách máy!!!", Alert.AlertType.ERROR);
         }
         ResetTrangThai();
         CapNhatLaiMainStatus();

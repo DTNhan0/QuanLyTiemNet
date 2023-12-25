@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="MainAnchor" prefHeight="600.0" prefWidth="1000.0" styleClass="MainColor" stylesheets="@../CSS/MainGiaoDien.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.TrangThaiMT.Phong_thuong_1_Controller">
     <children>
-        <FlowPane layoutX="300.0" layoutY="93.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="1000.0" AnchorPane.bottomAnchor="280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <FlowPane layoutX="300.0" layoutY="93.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="1000.0" AnchorPane.bottomAnchor="315.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <AnchorPane prefHeight="90.0" prefWidth="158.0">
                     <children>
@@ -270,9 +270,9 @@
                 </AnchorPane>
             </children>
         </FlowPane>
-        <AnchorPane layoutY="400.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="400.0">
+        <AnchorPane layoutX="15.0" layoutY="386.0" prefHeight="200.0" prefWidth="970.0" AnchorPane.bottomAnchor="0.0">
             <children>
-                <AnchorPane layoutY="34.0" prefHeight="166.0" prefWidth="1000.0" style="-fx-background-color: WHITE;" stylesheets="@../CSS/MainGiaoDien.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                <AnchorPane layoutY="23.0" prefHeight="167.0" prefWidth="970.0" style="-fx-background-color: WHITE;" stylesheets="@../CSS/MainGiaoDien.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0">
                     <children>
                         <Label layoutX="32.0" layoutY="14.0" prefHeight="40.0" prefWidth="101.0" text="Username:">
                             <font>
@@ -338,7 +338,7 @@
                 </AnchorPane>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="NhapNDHong" layoutX="8.0" layoutY="320.0" prefHeight="114.0" prefWidth="723.0" style="-fx-background-color: WHITE;" visible="false" AnchorPane.leftAnchor="0.0">
+        <AnchorPane fx:id="NhapNDHong" layoutX="8.0" layoutY="298.0" prefHeight="120.0" prefWidth="723.0" style="-fx-background-color: WHITE;" visible="false">
             <children>
                 <Label layoutX="26.0" layoutY="44.0" text="NỘI DUNG BỊ HỎNG:">
                     <font>

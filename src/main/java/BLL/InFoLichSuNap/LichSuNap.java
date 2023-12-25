@@ -8,8 +8,7 @@ public class LichSuNap {
     private double soTien;
     private LocalDateTime tgNap;
 
-    public LichSuNap(int id, String taiKhoan, String sdt, double soTien, LocalDateTime tgNap) {
-        this.id = id;
+    public LichSuNap(String taiKhoan, String sdt, double soTien, LocalDateTime tgNap) {
         this.taiKhoan = taiKhoan;
         this.sdt = sdt;
         this.soTien = soTien;
