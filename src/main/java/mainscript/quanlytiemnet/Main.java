@@ -14,6 +14,7 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 800, 535);
         stage.setTitle("Quản lý Net");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

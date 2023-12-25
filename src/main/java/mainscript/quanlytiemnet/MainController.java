@@ -200,6 +200,7 @@ public class MainController implements Initializable {
                 Stage loginStage = new Stage();
                 loginStage.setTitle("Quản lý Net");
                 loginStage.setScene(new Scene(loginRoot, 800, 535));
+                loginStage.setResizable(false);
                 loginStage.show();
             } catch (IOException e) {
                 e.printStackTrace();
