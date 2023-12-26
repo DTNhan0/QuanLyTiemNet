@@ -144,6 +144,32 @@ public class TaiKhoanDAO {
         }
     }
 
+    public TaiKhoan KtraTenVaSDT (String username, String sdt)
+    {
+        String sql = "SELECT * FROM TAIKHOAN WHERE USERNAME = ? AND SDT = ? AND TONTAI = 1";
+        try (
+                Connection con = new QLTiemNetConnectionDBS().getConnection();
+                PreparedStatement pstm = con.prepareStatement(sql);
+        )
+        {
+            pstm.setString(1, username);
+            pstm.setString(2, sdt);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                TaiKhoan tk = new TaiKhoan();
+                tk.setUsername(rs.getString("USERNAME"));
+                tk.setSdt(rs.getString("SDT"));
+                return tk;
+            } else {
+                System.out.println("Lỗi không có tài khoản nào được tìm thấy với username và password cung cấp!!!");
+                return null;
+            }
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean DangKyTK(TaiKhoan tk) throws Exception {
         String sql = "INSERT INTO TAIKHOAN (USERNAME, SDT, PASSWORD, ROLE, HANGTHANHVIEN, SOPHUTDADUNG, SOTIENTICHLUY, SOTIENCONLAI, DANGSUDUNG) VALUES (?, ?, ?, ?, null, 0, 0, 0, 0)";
         try (
