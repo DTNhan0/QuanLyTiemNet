@@ -172,7 +172,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="90.0" prefWidth="158.0">
                <children>
-                  <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 48" textFill="WHITE">
+                  <JFXButton layoutX="2.0" onAction="#chonButton" prefHeight="66.0" prefWidth="156.0" styleClass="ButtonMayTinh" stylesheets="@../CSS/ButtonXin.css" text="Máy 048" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                            <image>

@@ -308,6 +308,7 @@ public class Phong_VIP_Controller implements Initializable {
         NhapNDHong.setVisible(false);
         selectedIDMayFormat = chuyenChuoi(IDMay);
         HienThiThongTinNhap(e);
+
     }
 
     public void KhiKetNoi() {
@@ -321,6 +322,7 @@ public class Phong_VIP_Controller implements Initializable {
             showAlert("Lỗi!!!", "Vui lòng kiểm tra lại số tiền trong tài khoản hoặc thông tin nhập!!!", Alert.AlertType.ERROR);
             System.out.println("Vui lòng kiểm tra lại tài khoản");
         }else{
+            System.out.println(selectedIDMayFormat);
             new DSThongTinSD().themSuLKgiuaTKvaMay(tk, selectedIDMayFormat.toUpperCase());
             showAlert("Thông báo", "Đã kết nối thành công tk có SĐT: " + SdtTF.getText() + " với " + HienIDMay.getText(), Alert.AlertType.CONFIRMATION);
         }
