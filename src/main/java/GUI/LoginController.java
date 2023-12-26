@@ -224,7 +224,7 @@ public class LoginController implements Initializable {
             String sdt = fp_sdt.getText();
             TaiKhoanDAO dao = new TaiKhoanDAO();
             // Thực hiện truy vấn để kiểm tra thông tin đăng nhập
-            if (dao.KtraTenvaPassTK(username, sdt) != null) {
+            if (dao.KtraTenVaSDT(username, sdt) != null) {
                 // Nếu thông tin đăng nhập đúng, chuyển sang AnchorPane np_newPassForm
                 fp_questionForm.setVisible(false);
                 np_newPassForm.setVisible(true);
@@ -244,7 +244,7 @@ public class LoginController implements Initializable {
     private Pair<String, String> getUsernameAndSdt(String username, String sdt) {
         try {
             TaiKhoanDAO dao = new TaiKhoanDAO();
-            TaiKhoan res = dao.KtraTenvaPassTK(username, sdt);
+            TaiKhoan res = dao.KtraTenVaSDT(username, sdt);
             if (res != null) {
                 return new Pair<>(res.getUsername(), res.getSdt());
             } else {
