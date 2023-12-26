@@ -172,6 +172,7 @@ public class LoginController implements Initializable {
                     // Hiển thị mainForm.fxml trong cửa sổ hiện tại
                     Stage stage = (Stage) si_username.getScene().getWindow();
                     stage.setScene(new Scene(root));
+                    stage.setResizable(true);
                     stage.show();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
