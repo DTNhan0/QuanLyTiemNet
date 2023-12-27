@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.KHTiemNang.MainKHTMController">
+   <children>
+      <BorderPane fx:id="ChuyenPhong" prefHeight="600.0" prefWidth="1000.0" styleClass="MainColor" stylesheets="@../CSS/MainGiaoDien.css">
+         <top>
+            <HBox prefHeight="35.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXComboBox fx:id="TinhNang" focusColor="BLACK" onAction="#chonTinhNang" prefHeight="35.0" prefWidth="260.0" unFocusColor="BLACK" />
+                  <AnchorPane prefHeight="35.0" prefWidth="35.0" />
+                  <AnchorPane prefHeight="35.0" prefWidth="35.0" />
+                  <AnchorPane prefHeight="35.0" prefWidth="35.0" />
+                  <AnchorPane prefHeight="35.0" prefWidth="35.0" />
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <AnchorPane BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>

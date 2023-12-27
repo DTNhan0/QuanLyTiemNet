@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import mainscript.quanlytiemnet.ChuyenCanhFXML;
+import mainscript.quanlytiemnet.MainController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,7 +41,6 @@ public class TrangThaiMTController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        checkNapKhidagChoi();
         String[] cacPhong = {"Phòng thường 1", "Phòng thường 2", "Phòng VIP"};
         LoaiPhong.getItems().addAll(cacPhong);
         LoaiPhong.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 14px; -fx-text-fill: WHITE; -fx-font-weight: bold;");

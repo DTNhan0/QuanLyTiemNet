@@ -7,6 +7,7 @@ import BLL.InFoThongTinSD.DSThongTinSD;
 import BLL.InFoThongTinSD.ThongTinSuDung;
 import DAL.LichSuNapDAO;
 import DAL.TaiKhoanDAO;
+import GUI.TrangThaiMT.TrangThaiMTController;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -83,6 +84,7 @@ public class DanhSachTK {
     public void NapTien(TaiKhoan tk, double TienMoi){
         int index_TK = TimTaiKhoan(tk.getUsername(), tk.getSdt());
         if (index_TK != -1) {
+            new TrangThaiMTController().checkNapKhidagChoi();
             DSTaiKhoan.set(index_TK, tk);
             LichSuNap lsn = new LichSuNap(tk.getUsername(), tk.getSdt(), TienMoi, LocalDateTime.now());
             new LichSuNapDAO().themLichSuNapDBS(lsn);

@@ -19,4 +19,6 @@ module mainscript.quanlytiemnet {
     opens GUI.DSTaiKhoan to javafx.fxml;
     exports GUI.DanhSachMT;
     opens GUI.DanhSachMT to javafx.fxml;
+    exports GUI.KHTiemNang;
+    opens GUI.KHTiemNang to javafx.fxml;
 }

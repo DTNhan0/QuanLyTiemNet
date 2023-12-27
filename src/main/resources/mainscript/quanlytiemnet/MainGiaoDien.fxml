@@ -224,7 +224,7 @@
                                         </ImageView>
                                     </graphic>
                                 </JFXButton>
-                                <JFXButton alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="229.0" styleClass="Button" stylesheets="@../../CSS/ButtonXin.css" text="Khách hàng tiềm năng" textFill="WHITE">
+                                <JFXButton alignment="BASELINE_LEFT" onAction="#ChonKHTM" prefHeight="25.0" prefWidth="229.0" styleClass="Button" stylesheets="@../../CSS/ButtonXin.css" text="Khách hàng tiềm năng" textFill="WHITE">
                                     <font>
                                         <Font size="15.0" />
                                     </font>

@@ -1,0 +1,21 @@
+@keyframes changeColor {
+    0% {
+        -fx-text-fill: red;
+    }
+    25% {
+        -fx-text-fill: blue;
+    }
+    50% {
+        -fx-text-fill: green;
+    }
+    75% {
+        -fx-text-fill: orange;
+    }
+    100% {
+        -fx-text-fill: red;
+    }
+}
+
+.label {
+    animation: changeColor 4s infinite; /* 4s là thời gian hoàn thành một chu kỳ, infinite để lặp vô hạn */
+}

@@ -1,5 +1,6 @@
 package mainscript.quanlytiemnet;
 
+import DAL.TaiKhoanDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -116,11 +117,15 @@ public class MainController implements Initializable {
     );
 
     public void XuLyTKAmTien(){
-        for(TaiKhoan tk : new DanhSachTK().getDSTaiKhoan()){
-            if(tk.getSoTienConLai() < 0){
-                tk.setSoTienConLai(0);
-                new DanhSachTK().CapNhatTaiKhoan(tk);
+        try {
+            for(TaiKhoan tk : new TaiKhoanDAO().getAll()){
+                if(tk.getSoTienConLai() < 0){
+                    tk.setSoTienConLai(0);
+                    new DanhSachTK().CapNhatTaiKhoan(tk);
+                }
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -128,6 +133,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         StackingOnl = new DSThongTinSD().LayCacMayDagSDTrongTTSD();
         TenAdmin.setText(new DanhSachTK().getTaiKhoanDangNhap().getUsername());
+        XuLyTKAmTien();
         CapNhatMainStatus();
         MainControllerStatusManagement.setMainController(this);
         ChuyenCanhFXML object = new ChuyenCanhFXML();
@@ -175,6 +181,12 @@ public class MainController implements Initializable {
         Pane view = object.getPage("/DSMayTinh/MainDSMT.fxml");
         MainSwitching.setCenter(view);
     }
+    public void ChonKHTM(){
+        CapNhatMainStatus();
+        ChuyenCanhFXML object = new ChuyenCanhFXML();
+        Pane view = object.getPage("/KHTiemNang/MainKHTM.fxml");
+        MainSwitching.setCenter(view);
+    }
 
     public void ChonDangXuat(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -207,4 +219,6 @@ public class MainController implements Initializable {
             }
         }
     }
+
+
 }

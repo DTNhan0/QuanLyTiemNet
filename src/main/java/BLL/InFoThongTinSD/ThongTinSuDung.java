@@ -46,6 +46,12 @@ public class ThongTinSuDung {
         this.tgKetThuc = tgKetThuc;
     }
 
+    public ThongTinSuDung(String username, String sdt, LocalDateTime tgKetThuc) {
+        this.username = username;
+        this.sdt = sdt;
+        this.tgKetThuc = tgKetThuc;
+    }
+
     public void setSdt(String sdt) {
         this.sdt = sdt;
     }
